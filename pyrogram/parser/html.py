@@ -36,6 +36,7 @@ from typing import TypeAlias
 import pyrogram
 from pyrogram import raw, types
 from pyrogram.errors import PeerIdInvalid
+from pyrogram.utils.peers import get_input_user_or_channel
 
 from . import utils
 from .entities import EntitySpec, Insertion, InsertionKind, spec_for_tag, spec_for_type
@@ -318,7 +319,9 @@ class HTML:
 
             if isinstance(entity, raw.types.InputMessageEntityMentionName) and self.client:
                 try:
-                    entity.user_id = await self.client.resolve_peer(entity.user_id)
+                    entity.user_id = get_input_user_or_channel(
+                        await self.client.resolve_peer(entity.user_id)
+                    )
 
                 except PeerIdInvalid:
                     continue

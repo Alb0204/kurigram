@@ -1076,8 +1076,8 @@ class Message(Object, Update):
                     r = await client.invoke(
                         raw.functions.users.GetUsers(
                             id=[
-                                await client.resolve_peer(from_id),
-                                await client.resolve_peer(peer_id),
+                                utils.get_input_user_or_channel(await client.resolve_peer(from_id)),
+                                utils.get_input_user_or_channel(await client.resolve_peer(peer_id)),
                             ]
                         )
                     )
@@ -1646,8 +1646,8 @@ class Message(Object, Update):
                     r = await client.invoke(
                         raw.functions.users.GetUsers(
                             id=[
-                                await client.resolve_peer(from_id),
-                                await client.resolve_peer(peer_id),
+                                utils.get_input_user_or_channel(await client.resolve_peer(from_id)),
+                                utils.get_input_user_or_channel(await client.resolve_peer(peer_id)),
                             ]
                         )
                     )
@@ -2083,8 +2083,8 @@ class Message(Object, Update):
                     r = await client.invoke(
                         raw.functions.users.GetUsers(
                             id=[
-                                await client.resolve_peer(from_id),
-                                await client.resolve_peer(peer_id),
+                                utils.get_input_user_or_channel(await client.resolve_peer(from_id)),
+                                utils.get_input_user_or_channel(await client.resolve_peer(peer_id)),
                             ]
                         )
                     )

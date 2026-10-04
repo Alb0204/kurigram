@@ -74,7 +74,7 @@ class GetGameHighScores:
             high_scores = await session.invoke(
                 raw.functions.messages.GetInlineGameHighScores(
                     id=unpacked,
-                    user_id=await self.resolve_peer(user_id),
+                    user_id=utils.get_input_user_or_channel(await self.resolve_peer(user_id)),
                 ),
                 sleep_threshold=self.sleep_threshold,
             )
@@ -86,7 +86,7 @@ class GetGameHighScores:
                 raw.functions.messages.GetGameHighScores(
                     peer=await self.resolve_peer(chat_id),
                     id=message_id,
-                    user_id=await self.resolve_peer(user_id),
+                    user_id=utils.get_input_user_or_channel(await self.resolve_peer(user_id)),
                 )
             )
 

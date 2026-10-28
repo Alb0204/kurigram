@@ -109,16 +109,16 @@
       "title": "fix(methods): skip the updates watchdog with `no_updates` and cancel it on `terminate()`",
       "author": "AdzerKI",
       "head": "AdzerKI:fix/updates-watchdog-stop",
-      "reviewed_head_sha": null,
+      "reviewed_head_sha": "c54f4691291b8c48dab333e923368c6d84058d47",
       "seen_head_sha": "c54f4691291b8c48dab333e923368c6d84058d47",
       "closes": [
         524
       ],
-      "status": "pending",
-      "fork_commit": null,
+      "status": "adopted",
+      "fork_commit": "477fe0ab",
       "upstream_merge_sha": null,
       "reason": null,
-      "notes": null
+      "notes": "Tests fail without. Minor: contextlib.suppress(CancelledError) would also swallow a cancellation of terminate() itself."
     },
     "527": {
       "title": "feat(peers): resolve `min` users and channels through the messages they were seen in",
@@ -139,14 +139,14 @@
       "title": "fix(compiler): write every flagged payload under the bit that `write()` computed for it",
       "author": "Danipulok",
       "head": "kurigram-org:fix/flag-bit-gates-payload",
-      "reviewed_head_sha": null,
+      "reviewed_head_sha": "693b734e659ef9d110ab85e47060d678d35717eb",
       "seen_head_sha": "693b734e659ef9d110ab85e47060d678d35717eb",
       "closes": [],
-      "status": "pending",
-      "fork_commit": null,
+      "status": "adopted",
+      "fork_commit": "349fa1f7",
       "upstream_merge_sha": null,
       "reason": null,
-      "notes": null
+      "notes": "All 10 shared-bit constructors built outside pyrogram/raw checked at their call sites: both members or neither, as claimed. New tests fail without (8 of 18, API recompiled each side). Fork merged tests/unit/methods/bots/conftest.py with #541's."
     },
     "533": {
       "title": "feat(errors): add `FLOOD_SKIP_FAILED_WAIT` (420) and `MESSAGE_IDS_MISMATCH` (400) found in TDLib sources",
@@ -256,14 +256,14 @@
       "title": "feat(bots): accept `inline_message_id` in `get_game_high_scores()`",
       "author": "Danipulok",
       "head": "kurigram-org:feat/inline-game-score",
-      "reviewed_head_sha": null,
+      "reviewed_head_sha": "575247c9685b96a049d8fd224645c624a0f850f2",
       "seen_head_sha": "575247c9685b96a049d8fd224645c624a0f850f2",
       "closes": [],
-      "status": "pending",
-      "fork_commit": null,
+      "status": "adopted",
+      "fork_commit": "0cf64c8e",
       "upstream_merge_sha": null,
       "reason": null,
-      "notes": null
+      "notes": "Same DC/media-session pattern as set_game_score and edit_inline_*. Tests fail without (6 of 7)."
     },
     "542": {
       "title": "fix(types): annotate `BotVerification.bot` as `User | None` and accept `None` in `_parse()`",
@@ -425,44 +425,44 @@
       "title": "fix(client): fail a download that ends short instead of saving it",
       "author": "0xPyAI",
       "head": "0xPyAI:fix/download-ends-short",
-      "reviewed_head_sha": null,
+      "reviewed_head_sha": "061264c7c432b7c2192670bdf651b207f14ba947",
       "seen_head_sha": "061264c7c432b7c2192670bdf651b207f14ba947",
       "closes": [],
-      "status": "pending",
-      "fork_commit": null,
+      "status": "adopted",
+      "fork_commit": "74edf7c0",
       "upstream_merge_sha": null,
       "reason": null,
-      "notes": null
+      "notes": "StopTransmission still returns None (raised before the size check); photo sizes are exact (progressive uses max(sizes)). Test errors without."
     },
     "556": {
       "title": "fix(types): handle a missing chat in `Message._parse()`",
       "author": "Pharex38",
       "head": "Pharex38:fix/message-parse-missing-chat",
-      "reviewed_head_sha": null,
+      "reviewed_head_sha": "8a80560517105843e3f3605660b591d4ff19602e",
       "seen_head_sha": "8a80560517105843e3f3605660b591d4ff19602e",
       "closes": [
         331
       ],
-      "status": "pending",
-      "fork_commit": null,
+      "status": "adopted",
+      "fork_commit": "634d19ad",
       "upstream_merge_sha": null,
       "reason": null,
-      "notes": null
+      "notes": "Every remaining chat access in the parsers is inside a guard. Tests fail without (3 of 20)."
     },
     "557": {
       "title": "fix(client): don't drop the update batch when `GetChannelDifference` times out",
       "author": "Pharex38",
       "head": "Pharex38:fix/channel-difference-timeout",
-      "reviewed_head_sha": null,
+      "reviewed_head_sha": "d97aa0a27600ed038f5777e3775c2828e366f043",
       "seen_head_sha": "d97aa0a27600ed038f5777e3775c2828e366f043",
       "closes": [
         526
       ],
-      "status": "pending",
-      "fork_commit": null,
+      "status": "adopted",
+      "fork_commit": "13888ccb",
       "upstream_merge_sha": null,
       "reason": null,
-      "notes": null
+      "notes": "Session.invoke() turns a retried 500 into TimeoutError, confirmed in session.py, so the old PersistentTimestampOutdated except could never fire. Test fails without."
     },
     "558": {
       "title": "feat(storage): allow disabling vacuuming in SQLiteStorage",
@@ -495,8 +495,10 @@
     "62": {
       "title": "download_media(), the file size equals to 0 B",
       "status": "pending",
-      "addressed_by": null,
-      "notes": null
+      "addressed_by": [
+        "#555"
+      ],
+      "notes": "Partly: #555 refs it and stops the 0 B file; the original timeout already raises since upstream #310."
     },
     "109": {
       "title": "Pyrogram Rework",
@@ -546,9 +548,9 @@
     },
     "331": {
       "title": "Message.chat nullability not handled in Message.__parse_reply",
-      "status": "pending",
+      "status": "adopted",
       "addressed_by": [
-        556
+        "#556"
       ],
       "notes": null
     },
@@ -569,25 +571,27 @@
     },
     "524": {
       "title": "`stop()` waits out the updates watchdog, which runs even with `no_updates=True`",
-      "status": "pending",
+      "status": "adopted",
       "addressed_by": [
-        525
+        "#525"
       ],
       "notes": null
     },
     "526": {
       "title": "handle_updates: PERSISTENT_TIMESTAMP_OUTDATED on GetChannelDifference escapes as TimeoutError and drops the whole update batch",
-      "status": "pending",
+      "status": "adopted",
       "addressed_by": [
-        557
+        "#557"
       ],
       "notes": null
     }
   },
   "branches": {
     "fix/edit-message-reply-markup-removal": {
-      "status": "pending",
-      "notes": "Upstream branch with no PR (one commit, 976cfd50, 2026-09-15, 76 behind main). Review as if it were a PR."
+      "status": "deferred",
+      "notes": "Upstream branch with no PR (one commit, 976cfd50, 2026-09-15, 76 behind main). Review as if it were a PR.",
+      "reviewed_head_sha": "976cfd50",
+      "reason": "No PR upstream and 76 commits behind. Its main_api.tl:NNN citations fail the #537 guard, it names its sentinel `object` where upstream now uses MISSING, and it changes behaviour for callers already passing reply_markup=None (that would now remove the keyboard). The claim that an omitted field keeps the keyboard is server behaviour no offline test shows. Revisit if upstream opens a PR."
     }
   },
   "decisions": []

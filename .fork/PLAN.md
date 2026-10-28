@@ -3,7 +3,12 @@
 This fork (`Alb0204/kurigram`) tracks [`kurigram-org/kurigram`](https://github.com/kurigram-org/kurigram).
 It is not a rival project. Its goal is to ship upstream's pending fixes, plus features upstream
 hasn't reached yet, sooner than upstream does, while staying close enough that syncing stays cheap.
-Everything under `.fork/` is fork-only and never goes upstream.
+Everything under `.fork/` is fork-only.
+
+**Rule: this fork only reads from upstream.** No pushes, PRs, issues or comments go to
+`kurigram-org/kurigram`. Both clones have `upstream`'s push URL set to `DISABLED-fork-only`, and
+`gh repo set-default` points at the fork. Pass `-R Alb0204/kurigram` to every `gh pr`/`gh issue`
+command anyway, because `gh` targets a fork's parent by default.
 
 - `PLAN.md`: this file, covering how the fork is run. Change it when the process changes.
 - `ledger.json`: every upstream PR, issue and branch reviewed so far, with its decision. Update it
@@ -38,7 +43,7 @@ Everything under `.fork/` is fork-only and never goes upstream.
 Remotes: `origin` is `Alb0204/kurigram` and `upstream` is `kurigram-org/kurigram`. Fetch both with
 `git fetch --all --prune` at the start of every session.
 
-**Integration model: a linear stack on top of upstream.**
+**Integration model: a linear stack on top of upstream** (confirmed by the owner, 2026-10-28).
 
 - Fork `main` is `upstream/main` plus a stack of fork commits. The first commit adds `.fork/`. Each
   later commit is one adopted PR or one fork-only change.
@@ -108,9 +113,9 @@ easy to correlate.
 4. Decide:
    - Correct and complete: `adopted`. Fast-forward it onto `main` as its own commit(s) with the
      `Upstream-PR` trailer.
-   - Correct direction but incomplete or wrong in places: `deferred`. Optionally fix it on a fork
-     branch, in which case the entry notes "fork carries fixes on top", and the fix goes back
-     upstream as a review comment or follow-up PR if wanted.
+   - Correct direction but incomplete or wrong in places: `deferred`. Optionally finish it on a
+     fork branch. The entry then notes "fork carries fixes on top" and becomes `adopted` once the
+     finished version lands.
    - Wrong, or made obsolete by another PR: `rejected`.
 5. Record `reviewed_head_sha`, the status and the reason in `ledger.json`.
 
@@ -128,9 +133,10 @@ less to carry.
    #527 and #488 (both touch `min` peer resolution, #478, so pick one), #523, #558, #559, #479,
    #450, #471.
 
-Once a mirrored branch's head SHA is recorded in the ledger, its copy on `origin` is redundant,
-because upstream holds the original. Delete it with `git push origin --delete <branch>` after
-confirming. That pruning is what actually brings the branch count down.
+The 27 copies of upstream branches on `origin` were deleted on 2026-10-28, after their head SHAs
+went into the ledger (`seen_head_sha`). Upstream still holds the originals, and
+`git fetch upstream` brings them back locally whenever a review needs one. `origin` carries only
+`main`, fork work branches and the fork's own tags from now on.
 
 ## 4. Phase 2: keep in step with upstream
 
@@ -147,7 +153,7 @@ Run this whenever `upstream/main` moves, which `ledger_sync.py` reports.
        `superseded`.
      - **Ours is better** (fixes a case theirs misses, or has a test theirs lacks): keep ours,
        rewritten on top of theirs as a small delta commit with a `Fork-only:` trailer, and add a
-       `DECISIONS.md` line saying why. Consider sending the delta upstream.
+       `DECISIONS.md` line saying why.
      - **Both differ in non-overlapping ways:** merge them by hand and record that in
        `DECISIONS.md`.
 3. Run the full gate, update `last_synced_upstream_main`, then force-push with lease.
@@ -161,8 +167,7 @@ Issues go through the same ledger flow as PRs:
 
 - An issue with a PR (#526, #524, #478, #331, #174, #143) is resolved when that PR is adopted.
 - An issue without a PR (#202, #160, #224, #62) needs a reproduction first. Only after that does
-  the fork write a fix of its own as a `Fork-only` commit, which can optionally go upstream as a
-  PR.
+  the fork write a fix of its own as a `Fork-only` commit.
 - Discussions (#438, #109) and the module rename (#150) are tracked for their outcome only. The
   fork follows upstream on naming and never leads, because a rename breaks every import.
 
@@ -212,8 +217,7 @@ gets worse.
 
 A scheduled workflow (`.github/workflows/fork-coverage.yml`, weekly, plus `workflow_dispatch`)
 runs both scripts and opens or updates one tracking issue on the fork with the reports. It runs
-only on `Alb0204/kurigram` (`if: github.repository == 'Alb0204/kurigram'`), so it stays inert if
-the stack is ever offered upstream.
+only on `Alb0204/kurigram` (`if: github.repository == 'Alb0204/kurigram'`).
 
 Feature work driven by the coverage report goes into ordinary `feat/…` branches with
 `Fork-only:` trailers. Pick by user value, not by count. The order that report points to today:
@@ -230,8 +234,8 @@ Bot API features that are only name gaps, which are cheap, then `messages`, `pay
   `compiler/` instead.
 - **Gate before every push:** `make api && make lint && make typecheck && make test-unit`. Don't
   widen `ty` ignores or narrow `ruff` rules to get a change through.
-- **Scope:** one concern per commit, so every fork-only change can be sent upstream as a PR
-  unchanged. If one is sent, record the upstream PR number in its ledger entry.
+- **Scope:** one concern per commit, like upstream, so a sync conflict touches one change and its
+  ledger entry only.
 - **Tests:** they go in `tests/unit/`, `tests/guards/` or `tests/integrations/` according to what
   they need. A test outside those three fails the run.
 
@@ -244,13 +248,12 @@ example, `kurigram @ git+https://github.com/Alb0204/kurigram@fork-v2.x.y-1`. Cre
 also trigger `pypi_release.yml`, so **never run `make tag` on the fork**. The fork has no PyPI
 project.
 
-## 9. Open decisions
+## 9. Settled decisions (2026-10-28)
 
-- Rebase or merge integration (§1). The default is rebase.
-- Whether to delete the mirrored upstream branches from `origin` once they're in the ledger (§3).
-- Switching the `fast` extra from `tgcrypto>=1.2.2` to `tgcrypto-pyrofork>=1.2.9` (the fork at
-  `Alb0204/tgcrypto-pyrofork`). The original `tgcrypto` (1.2.5) has no wheels past cp311, and both
-  distributions install the same `tgcrypto` module, so a project that pulls in both gets one
-  overwriting the other's files. This would be a `Fork-only` commit worth offering upstream.
-- Whether to send fork-only fixes back upstream as PRs. This is optional, and the ledger supports
-  it either way.
+- Integration by rebase (§1).
+- Mirrored upstream branches deleted from `origin` (§3).
+- The `fast` extra depends on `tgcrypto-pyrofork>=1.2.9` from `Alb0204/tgcrypto-pyrofork`
+  (`Fork-only: tgcrypto-pyrofork`). The original `tgcrypto` (1.2.5) has no wheels past cp311, and
+  both distributions install the same `tgcrypto` module, so pulling in both makes one overwrite the
+  other's files.
+- Nothing is contributed upstream (the rule at the top of this file).

@@ -1,0 +1,70 @@
+# Bot API names that have a counterpart here under another name or shape. A Bot API method
+#  counts as covered when its `snake_case` name is a `Client` method, and a type when a class of
+#  the same name exists; everything else is a gap unless it is listed below.
+#
+# Only list a method whose counterpart a bot can call (its docstring includes
+#  `usable-by/bots` or `usable-by/users-bots`): a users-only method is not Bot API parity.
+#  `coverage.py` reports a `renamed` entry whose target has disappeared.
+
+[methods.renamed]
+forwardMessage = "forward_messages"
+setMessageReaction = "send_reaction"
+getUserProfilePhotos = "get_chat_photos"
+setChatAdministratorCustomTitle = "set_administrator_title"
+getChatMemberCount = "get_chat_members_count"
+setMyCommands = "set_bot_commands"
+deleteMyCommands = "delete_bot_commands"
+getMyCommands = "get_bot_commands"
+setMyName = "set_bot_name"
+getMyName = "get_bot_name"
+setMyDescription = "set_bot_info_description"
+getMyDescription = "get_bot_info_description"
+setMyShortDescription = "set_bot_info_short_description"
+getMyShortDescription = "get_bot_info_short_description"
+setMyDefaultAdministratorRights = "set_bot_default_privileges"
+getMyDefaultAdministratorRights = "get_bot_default_privileges"
+giftPremiumSubscription = "gift_premium_with_stars"
+deleteMessage = "delete_messages"
+getMyStarBalance = "get_stars_balance"
+
+[methods.not_applicable]
+# Bot API HTTP transport. An MTProto client receives updates over its own connection.
+getUpdates = "updates arrive over the MTProto connection"
+setWebhook = "no webhooks over MTProto"
+deleteWebhook = "no webhooks over MTProto"
+getWebhookInfo = "no webhooks over MTProto"
+close = "closes a Bot API server instance"
+
+[methods.different_shape]
+getChatAdministrators = "get_chat_members(filter=ChatMembersFilter.ADMINISTRATORS)"
+getUserGifts = "get_chat_gifts, which takes a user as the chat"
+getFile = "download_media, which resolves and downloads in one call"
+
+[types.renamed]
+Birthdate = "Birthday"
+PhotoSize = "Thumbnail"
+BusinessOpeningHours = "BusinessWorkingHours"
+BusinessOpeningHoursInterval = "BusinessWeeklyOpen"
+InlineQueryResultGif = "InlineQueryResultAnimation"
+InlineQueryResultCachedGif = "InlineQueryResultCachedAnimation"
+
+[types.not_applicable]
+Update = "updates are dispatched to handlers, not returned as one object"
+WebhookInfo = "no webhooks over MTProto"
+ResponseParameters = "Bot API HTTP error fields; MTProto errors are exceptions"
+InputFile = "file arguments take a path, a URL, a file_id or a binary stream"
+MessageId = "copy and forward methods return the `Message` itself"
+
+[types.different_shape]
+ChatFullInfo = "get_chat returns a `Chat` carrying the full information"
+ChatMemberOwner = "one `ChatMember` with a `status`"
+ChatMemberAdministrator = "one `ChatMember` with a `status`"
+ChatMemberMember = "one `ChatMember` with a `status`"
+ChatMemberRestricted = "one `ChatMember` with a `status`"
+ChatMemberLeft = "one `ChatMember` with a `status`"
+ChatMemberBanned = "one `ChatMember` with a `status`"
+ReactionType = "one `Reaction` with an emoji, a custom emoji id or `paid`"
+ReactionTypeEmoji = "one `Reaction` with an emoji, a custom emoji id or `paid`"
+ReactionTypeCustomEmoji = "one `Reaction` with an emoji, a custom emoji id or `paid`"
+ReactionTypePaid = "one `Reaction` with an emoji, a custom emoji id or `paid`"
+ReactionCount = "`Reaction.count`"

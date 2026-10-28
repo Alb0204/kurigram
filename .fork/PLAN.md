@@ -18,7 +18,7 @@ command anyway, because `gh` targets a fork's parent by default.
 ## 0. Starting point (2026-10-28)
 
 - Fork `main` was identical to `upstream/main` at `80aa42d4`. The fork has no changes of its own yet.
-- **The 27 extra branches on `origin` are not fork work.** They are byte-identical copies of
+- **The 26 extra branches on `origin` are not fork work.** They are byte-identical copies of
   upstream's own branches, which back upstream's open PRs #520–#553 (mostly by Danipulok) and one
   dependabot PR. One branch, `fix/edit-message-reply-markup-removal`, has no PR at all. "Check the
   branches and merge them" therefore means "adopt upstream's pending PRs early", which is what §3
@@ -133,7 +133,7 @@ less to carry.
    #527 and #488 (both touch `min` peer resolution, #478, so pick one), #523, #558, #559, #479,
    #450, #471.
 
-The 27 copies of upstream branches on `origin` were deleted on 2026-10-28, after their head SHAs
+The 26 copies of upstream branches on `origin` were deleted on 2026-10-28, after their head SHAs
 went into the ledger (`seen_head_sha`). Upstream still holds the originals, and
 `git fetch upstream` brings them back locally whenever a review needs one. `origin` carries only
 `main`, fork work branches and the fork's own tags from now on.

@@ -177,6 +177,20 @@ Both scripts are plain Python that run offline against the repo, plus network fe
 cached. They need to pass `ruff` and `ty`, and must not trip `tests/guards`, which sweeps the whole
 repository. Check that with `make test-guards` before committing them.
 
+Built 2026-10-29. Run them from the repository root:
+
+```
+git fetch upstream
+uv run python .fork/scripts/ledger_sync.py           # report only
+uv run python .fork/scripts/ledger_sync.py --write   # also record new items and moved heads
+uv run python .fork/scripts/coverage.py              # writes .fork/coverage.md
+uv run python .fork/scripts/coverage.py --write      # also saves the numbers as the baseline
+```
+
+`coverage.py --cached` reuses the pages in `.fork/.cache/` (git-ignored). The baseline lives in
+`.fork/coverage.json`. Move it with `--write` only in the same commit as the change that moved
+the numbers, so every jump in the history has a reason next to it.
+
 ### `ledger_sync.py` (do first, it's the smaller one)
 
 1. Pull open and recently closed PRs and issues via `gh` (`gh pr list --state all --json …`).
@@ -217,7 +231,9 @@ gets worse.
 
 A scheduled workflow (`.github/workflows/fork-coverage.yml`, weekly, plus `workflow_dispatch`)
 runs both scripts and opens or updates one tracking issue on the fork with the reports. It runs
-only on `Alb0204/kurigram` (`if: github.repository == 'Alb0204/kurigram'`).
+only on `Alb0204/kurigram` (`if: github.repository == 'Alb0204/kurigram'`). The report always goes
+to the run's summary page; the issue (label `fork-report`) is only written while issues are
+enabled on the fork.
 
 Feature work driven by the coverage report goes into ordinary `feat/…` branches with
 `Fork-only:` trailers. Pick by user value, not by count. The order that report points to today:

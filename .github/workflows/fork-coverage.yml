@@ -1,0 +1,80 @@
+name: Fork coverage
+
+# The fork's weekly look at upstream and at Telegram: `ledger_sync.py` lists what changed in
+#  upstream's pull requests and issues, `coverage.py` the schema layer, the raw functions with no
+#  wrapper and the Bot API gaps. Neither one writes anything back to the repository.
+on:
+  schedule:
+    - cron: "0 7 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  report:
+    # Anyone who forks this fork gets the file too, and their copy has no business reporting here.
+    if: github.repository == 'Alb0204/kurigram'
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          # `ledger_sync.py` reads the commits between the last synced upstream head and now.
+          fetch-depth: 0
+
+      - name: Fetch upstream
+        run: |
+          git remote add upstream https://github.com/kurigram-org/kurigram.git
+          git fetch --no-tags upstream main
+
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v10.0.1
+
+      - name: Ledger sync
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          uv run --no-project python .fork/scripts/ledger_sync.py --output ledger.md
+
+      # A worse number fails this step on purpose, so the run shows red, but the report is still
+      #  published by the steps after it.
+      - name: Coverage
+        id: coverage
+        continue-on-error: true
+        run: |
+          uv run --no-project python .fork/scripts/coverage.py
+
+      - name: Publish the report
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          OUTCOME: ${{ steps.coverage.outcome }}
+        run: |
+          {
+            echo "Run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+            echo "Coverage against the baseline: ${OUTCOME}"
+            echo
+            cat ledger.md
+            echo
+            cat .fork/coverage.md
+          } > report.md
+          cat report.md >> "$GITHUB_STEP_SUMMARY"
+
+          # The tracking issue needs issues enabled on the fork; without them the summary above
+          #  is the whole report.
+          if [ "$(gh repo view "$GITHUB_REPOSITORY" --json hasIssuesEnabled --jq .hasIssuesEnabled)" = "true" ]; then
+            gh label create fork-report --color 5319e7 --description "Weekly fork report" --force
+            number=$(gh issue list --label fork-report --state open --json number --jq '.[0].number')
+            if [ -n "$number" ]; then
+              gh issue edit "$number" --body-file report.md
+            else
+              gh issue create --title "Fork coverage report" --label fork-report --body-file report.md
+            fi
+          fi
+
+      - name: Fail on a worse number
+        if: steps.coverage.outcome == 'failure'
+        run: |
+          exit 1

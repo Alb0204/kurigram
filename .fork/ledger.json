@@ -1,0 +1,594 @@
+{
+  "schema": 1,
+  "upstream": "kurigram-org/kurigram",
+  "last_synced_upstream_main": "80aa42d45a699faaea2d048fe3740742abe34438",
+  "last_reviewed": "2026-10-28",
+  "statuses": {
+    "pending": "not reviewed yet",
+    "adopted": "merged into the fork; `fork_commit` set",
+    "deferred": "reviewed, intended feature not complete yet; kept open",
+    "rejected": "will not be adopted; `reason` set",
+    "superseded": "upstream merged it or something better; drop our copy",
+    "fork-only": "fork change with no upstream counterpart"
+  },
+  "pull_requests": {
+    "450": {
+      "title": "fix(async): route local file I/O through aiofiles, enable ruff's ASYNC rule",
+      "author": "KrimsN",
+      "head": "KrimsN:feature/aiofiles-async-ruff",
+      "reviewed_head_sha": null,
+      "seen_head_sha": "e02214a591c8481ffec4de49d7cff4b4d49abbb0",
+      "closes": [],
+      "status": "pending",
+      "fork_commit": null,
+      "upstream_merge_sha": null,
+      "reason": null,
+      "notes": null
+    },
+    "471": {
+      "title": "feat(client): add `get_user()` and `get_message()`, and raise from `get_chat()` instead of answering `None`",
+      "author": "Danipulok",
+      "head": "kurigram-org:fix/get-users-get-chat-none",
+      "reviewed_head_sha": null,
+      "seen_head_sha": "51a75f217b49fa76679459b19f83f402b0791a2c",
+      "closes": [],
+      "status": "pending",
+      "fork_commit": null,
+      "upstream_merge_sha": null,
+      "reason": null,
+      "notes": null
+    },
+    "479": {
+      "title": "fix(session): harden packet unpack and update difference sync against…",
+      "author": "mr-dariush",
+      "head": "mr-dariush:fix/mtproto-unknown-constructor-resilience",
+      "reviewed_head_sha": null,
+      "seen_head_sha": "ff21adc2fb353fb84fad7c8885d361fa54972031",
+      "closes": [],
+      "status": "pending",
+      "fork_commit": null,
+      "upstream_merge_sha": null,
+      "reason": null,
+      "notes": null
+    },
+    "488": {
+      "title": "fix(peers): accept `*FromMessage` peers and send `InputUser`/`InputChannel` where expected",
+      "author": "eeeob",
+      "head": "eeeob:fix/input-peer-user-from-message",
+      "reviewed_head_sha": null,
+      "seen_head_sha": "8d6f1b6077c5765a494cc8bb53cfae94045c8b22",
+      "closes": [],
+      "status": "pending",
+      "fork_commit": null,
+      "upstream_merge_sha": null,
+      "reason": null,
+      "notes": null
+    },
+    "520": {
+      "title": "feat(messages): expose the emoji-interaction chat actions through a `ChatAction` type family",
+      "author": "Danipulok",
+      "head": "kurigram-org:feat/chat-action-emoji-interaction",
+      "reviewed_head_sha": null,
+      "seen_head_sha": "c39d1ec78641271e8d6a069de41bf0a9e951f6ce",
+      "closes": [
+        174
+      ],
+      "status": "pending",
+      "fork_commit": null,
+      "upstream_merge_sha": null,
+      "reason": null,
+      "notes": "Closes #174. Branch is 41 commits behind upstream/main; rebase before review."
+    },
+    "521": {
+      "title": "refactor(types): make `_parse*` helpers return their type and raise `EmptyObjectError` on empty constructors",
+      "author": "Danipulok",
+      "head": "kurigram-org:refactor/parsers-raise-on-empty",
+      "reviewed_head_sha": null,
+      "seen_head_sha": "8048ff78f8332a8ac6210592854754e5bb3cbced",
+      "closes": [],
+      "status": "pending",
+      "fork_commit": null,
+      "upstream_merge_sha": null,
+      "reason": null,
+      "notes": null
+    },
+    "523": {
+      "title": "Add HTML and Markdown serialization for rich messages",
+      "author": "yehuda-lev",
+      "head": "yehuda-lev:codex/rich-message-formatting-clean",
+      "reviewed_head_sha": null,
+      "seen_head_sha": "c7072edd58dd10db6a82759e0b3f88da1d9541fd",
+      "closes": [],
+      "status": "pending",
+      "fork_commit": null,
+      "upstream_merge_sha": null,
+      "reason": null,
+      "notes": null
+    },
+    "525": {
+      "title": "fix(methods): skip the updates watchdog with `no_updates` and cancel it on `terminate()`",
+      "author": "AdzerKI",
+      "head": "AdzerKI:fix/updates-watchdog-stop",
+      "reviewed_head_sha": null,
+      "seen_head_sha": "c54f4691291b8c48dab333e923368c6d84058d47",
+      "closes": [
+        524
+      ],
+      "status": "pending",
+      "fork_commit": null,
+      "upstream_merge_sha": null,
+      "reason": null,
+      "notes": null
+    },
+    "527": {
+      "title": "feat(peers): resolve `min` users and channels through the messages they were seen in",
+      "author": "eeeob",
+      "head": "eeeob:feat/resolve-min-peers-from-message",
+      "reviewed_head_sha": null,
+      "seen_head_sha": "273da83ca6494490e5f3045f1f6ffbefde2dbf05",
+      "closes": [
+        478
+      ],
+      "status": "pending",
+      "fork_commit": null,
+      "upstream_merge_sha": null,
+      "reason": null,
+      "notes": null
+    },
+    "532": {
+      "title": "fix(compiler): write every flagged payload under the bit that `write()` computed for it",
+      "author": "Danipulok",
+      "head": "kurigram-org:fix/flag-bit-gates-payload",
+      "reviewed_head_sha": null,
+      "seen_head_sha": "693b734e659ef9d110ab85e47060d678d35717eb",
+      "closes": [],
+      "status": "pending",
+      "fork_commit": null,
+      "upstream_merge_sha": null,
+      "reason": null,
+      "notes": null
+    },
+    "533": {
+      "title": "feat(errors): add `FLOOD_SKIP_FAILED_WAIT` (420) and `MESSAGE_IDS_MISMATCH` (400) found in TDLib sources",
+      "author": "Danipulok",
+      "head": "kurigram-org:chore/tdlib-error-ids",
+      "reviewed_head_sha": null,
+      "seen_head_sha": "920460bc4019f869fede8898c705e564b2b20386",
+      "closes": [],
+      "status": "pending",
+      "fork_commit": null,
+      "upstream_merge_sha": null,
+      "reason": null,
+      "notes": null
+    },
+    "534": {
+      "title": "ci(workflow): pin actions to commit SHAs, deduplicate the setup steps and add Dependabot",
+      "author": "Danipulok",
+      "head": "kurigram-org:ci/pin-actions",
+      "reviewed_head_sha": null,
+      "seen_head_sha": "1aa33ea86b891e2877f1ec22da162fb9a3119237",
+      "closes": [],
+      "status": "pending",
+      "fork_commit": null,
+      "upstream_merge_sha": null,
+      "reason": null,
+      "notes": null
+    },
+    "535": {
+      "title": "docs(compiler): generate the decorators page and record the `Client` methods left out of the docs",
+      "author": "Danipulok",
+      "head": "kurigram-org:docs/client-categories-gap",
+      "reviewed_head_sha": null,
+      "seen_head_sha": "cb3112eeb7b5086b931ca05d0690db1a048498cd",
+      "closes": [],
+      "status": "pending",
+      "fork_commit": null,
+      "upstream_merge_sha": null,
+      "reason": null,
+      "notes": null
+    },
+    "536": {
+      "title": "docs(compiler): point the `GetFutureSalts` `Returns:` at `raw.core.FutureSalts`",
+      "author": "Danipulok",
+      "head": "kurigram-org:docs/future-salts-docstring",
+      "reviewed_head_sha": null,
+      "seen_head_sha": "e9100990a1e32897d7fefd96131060edb2ae8a31",
+      "closes": [],
+      "status": "pending",
+      "fork_commit": null,
+      "upstream_merge_sha": null,
+      "reason": null,
+      "notes": null
+    },
+    "537": {
+      "title": "docs(comments): drop line numbers from `path:line` citations and reject new ones in a guard test",
+      "author": "Danipulok",
+      "head": "kurigram-org:docs/path-line-citations",
+      "reviewed_head_sha": null,
+      "seen_head_sha": "fa477676436ea3c25d1d7d92b1e462a01d993e09",
+      "closes": [],
+      "status": "pending",
+      "fork_commit": null,
+      "upstream_merge_sha": null,
+      "reason": null,
+      "notes": null
+    },
+    "538": {
+      "title": "docs(bots): make the `set_bot_name()` and `set_managed_bot_access_settings()` summary lines say they change, not get",
+      "author": "Danipulok",
+      "head": "kurigram-org:docs/set-summary-lines",
+      "reviewed_head_sha": null,
+      "seen_head_sha": "550641806576ffa33a016872a3403399dddc332b",
+      "closes": [],
+      "status": "pending",
+      "fork_commit": null,
+      "upstream_merge_sha": null,
+      "reason": null,
+      "notes": null
+    },
+    "539": {
+      "title": "build(docs): fail `make docs` on any Sphinx warning with `-W --keep-going`",
+      "author": "Danipulok",
+      "head": "kurigram-org:docs/sphinx-warnings-fail",
+      "reviewed_head_sha": null,
+      "seen_head_sha": "8795e6ddb3626c7ac02d91ae7d4513e52b70f0d4",
+      "closes": [],
+      "status": "pending",
+      "fork_commit": null,
+      "upstream_merge_sha": null,
+      "reason": null,
+      "notes": null
+    },
+    "540": {
+      "title": "docs(stories): add the `Other Parameters:` block that `send_story()` and `edit_story_media()` point `progress` at",
+      "author": "Danipulok",
+      "head": "kurigram-org:docs/story-other-parameters",
+      "reviewed_head_sha": null,
+      "seen_head_sha": "d0272964f137104a88f47bab2a251fff4dbd4b6e",
+      "closes": [],
+      "status": "pending",
+      "fork_commit": null,
+      "upstream_merge_sha": null,
+      "reason": null,
+      "notes": null
+    },
+    "541": {
+      "title": "feat(bots): accept `inline_message_id` in `get_game_high_scores()`",
+      "author": "Danipulok",
+      "head": "kurigram-org:feat/inline-game-score",
+      "reviewed_head_sha": null,
+      "seen_head_sha": "575247c9685b96a049d8fd224645c624a0f850f2",
+      "closes": [],
+      "status": "pending",
+      "fork_commit": null,
+      "upstream_merge_sha": null,
+      "reason": null,
+      "notes": null
+    },
+    "542": {
+      "title": "fix(types): annotate `BotVerification.bot` as `User | None` and accept `None` in `_parse()`",
+      "author": "Danipulok",
+      "head": "kurigram-org:fix/bot-verification-types",
+      "reviewed_head_sha": null,
+      "seen_head_sha": "fba5d23f0bac4e88361709291a56ba999b3b2191",
+      "closes": [],
+      "status": "pending",
+      "fork_commit": null,
+      "upstream_merge_sha": null,
+      "reason": null,
+      "notes": null
+    },
+    "543": {
+      "title": "fix(types): parse `Community` and `CommunityForbidden` as `ChatType.COMMUNITY` chats instead of sending them to the channel parser",
+      "author": "Danipulok",
+      "head": "kurigram-org:fix/community-chat-parse",
+      "reviewed_head_sha": null,
+      "seen_head_sha": "34545cea0d339fa624d6f4d35e791f537663b73e",
+      "closes": [],
+      "status": "pending",
+      "fork_commit": null,
+      "upstream_merge_sha": null,
+      "reason": null,
+      "notes": null
+    },
+    "544": {
+      "title": "fix(types): parse `UpgradedGiftOriginalDetails.sender` and `receiver` as `Chat` from users or chats",
+      "author": "Danipulok",
+      "head": "kurigram-org:fix/gift-original-details-chats",
+      "reviewed_head_sha": null,
+      "seen_head_sha": "ddede0796bd81b1023fc8af0a7bf7a9cb677dc48",
+      "closes": [],
+      "status": "pending",
+      "fork_commit": null,
+      "upstream_merge_sha": null,
+      "reason": null,
+      "notes": null
+    },
+    "545": {
+      "title": "fix(types): look each `Poll` recent voter up in `chats` too, so a channel voter is no longer `None`",
+      "author": "Danipulok",
+      "head": "kurigram-org:fix/poll-channel-voters",
+      "reviewed_head_sha": null,
+      "seen_head_sha": "4c41fc694804fe50599f0eb2cdbf40f61827bfe9",
+      "closes": [],
+      "status": "pending",
+      "fork_commit": null,
+      "upstream_merge_sha": null,
+      "reason": null,
+      "notes": null
+    },
+    "546": {
+      "title": "fix(types): type `ProximityAlertTriggered.traveler` and `watcher` as `Chat | None` and `distance` as `int`",
+      "author": "Danipulok",
+      "head": "kurigram-org:fix/proximity-alert-types",
+      "reviewed_head_sha": null,
+      "seen_head_sha": "7f67042e6e073c8a6e3f03013739d28b975124b5",
+      "closes": [],
+      "status": "pending",
+      "fork_commit": null,
+      "upstream_merge_sha": null,
+      "reason": null,
+      "notes": null
+    },
+    "547": {
+      "title": "fix(utils): accept `None` in `get_raw_peer_id()`, as its body already returns `None` for it",
+      "author": "Danipulok",
+      "head": "kurigram-org:fix/raw-peer-id-optional",
+      "reviewed_head_sha": null,
+      "seen_head_sha": "5eb64a1f3c5a64e450a7c8cf692107ed1a9e512a",
+      "closes": [],
+      "status": "pending",
+      "fork_commit": null,
+      "upstream_merge_sha": null,
+      "reason": null,
+      "notes": null
+    },
+    "548": {
+      "title": "refactor(types): remove the unreachable `StarGiftAttributeOriginalDetails` branch and its fields from `GiftAttribute`",
+      "author": "Danipulok",
+      "head": "kurigram-org:refactor/gift-attribute-dead-branch",
+      "reviewed_head_sha": null,
+      "seen_head_sha": "04582034a7ec25729f4c4689e3e0b02e953fd9a7",
+      "closes": [],
+      "status": "pending",
+      "fork_commit": null,
+      "upstream_merge_sha": null,
+      "reason": null,
+      "notes": null
+    },
+    "549": {
+      "title": "refactor(parser): rewrite the HTML and Markdown parsers on one entity spec table",
+      "author": "Danipulok",
+      "head": "kurigram-org:refactor/parser",
+      "reviewed_head_sha": null,
+      "seen_head_sha": "c79b410d26db32d5d6096b21fe240f940a5a8b4d",
+      "closes": [],
+      "status": "pending",
+      "fork_commit": null,
+      "upstream_merge_sha": null,
+      "reason": null,
+      "notes": null
+    },
+    "550": {
+      "title": "refactor(typing): annotate generators as `Generator`/`AsyncGenerator` instead of `Iterator`",
+      "author": "Danipulok",
+      "head": "kurigram-org:refactor/sync-generators",
+      "reviewed_head_sha": null,
+      "seen_head_sha": "9aa679ae46070cda49d013f3b60657d2b719f94a",
+      "closes": [],
+      "status": "pending",
+      "fork_commit": null,
+      "upstream_merge_sha": null,
+      "reason": null,
+      "notes": null
+    },
+    "551": {
+      "title": "test(guards): hold class `Parameters:` blocks against `__init__` and reject an entry documented twice",
+      "author": "Danipulok",
+      "head": "kurigram-org:test/docstring-guard-classes-duplicates",
+      "reviewed_head_sha": null,
+      "seen_head_sha": "03e3716cda9753325ad7984efb354199218baa01",
+      "closes": [],
+      "status": "pending",
+      "fork_commit": null,
+      "upstream_merge_sha": null,
+      "reason": null,
+      "notes": null
+    },
+    "552": {
+      "title": "fix(parser): make Markdown `unparse` then `parse` return the same message, pinned by a round-trip corpus",
+      "author": "Danipulok",
+      "head": "kurigram-org:test/markdown-round-trip-corpus",
+      "reviewed_head_sha": null,
+      "seen_head_sha": "80bd98ab6e560d3d5316e9c643e7d1b6c31eaa35",
+      "closes": [],
+      "status": "pending",
+      "fork_commit": null,
+      "upstream_merge_sha": null,
+      "reason": null,
+      "notes": "Stacked on #549 (contains every refactor/parser commit); review #549 first."
+    },
+    "553": {
+      "title": "build(deps): bump urllib3 from 2.7.0 to 2.8.0",
+      "author": "app/dependabot",
+      "head": "kurigram-org:dependabot/uv/urllib3-2.8.0",
+      "reviewed_head_sha": null,
+      "seen_head_sha": "2ba18afe5698402faca1af18c60eb6cc370d47f4",
+      "closes": [],
+      "status": "pending",
+      "fork_commit": null,
+      "upstream_merge_sha": null,
+      "reason": null,
+      "notes": null
+    },
+    "555": {
+      "title": "fix(client): fail a download that ends short instead of saving it",
+      "author": "0xPyAI",
+      "head": "0xPyAI:fix/download-ends-short",
+      "reviewed_head_sha": null,
+      "seen_head_sha": "061264c7c432b7c2192670bdf651b207f14ba947",
+      "closes": [],
+      "status": "pending",
+      "fork_commit": null,
+      "upstream_merge_sha": null,
+      "reason": null,
+      "notes": null
+    },
+    "556": {
+      "title": "fix(types): handle a missing chat in `Message._parse()`",
+      "author": "Pharex38",
+      "head": "Pharex38:fix/message-parse-missing-chat",
+      "reviewed_head_sha": null,
+      "seen_head_sha": "8a80560517105843e3f3605660b591d4ff19602e",
+      "closes": [
+        331
+      ],
+      "status": "pending",
+      "fork_commit": null,
+      "upstream_merge_sha": null,
+      "reason": null,
+      "notes": null
+    },
+    "557": {
+      "title": "fix(client): don't drop the update batch when `GetChannelDifference` times out",
+      "author": "Pharex38",
+      "head": "Pharex38:fix/channel-difference-timeout",
+      "reviewed_head_sha": null,
+      "seen_head_sha": "d97aa0a27600ed038f5777e3775c2828e366f043",
+      "closes": [
+        526
+      ],
+      "status": "pending",
+      "fork_commit": null,
+      "upstream_merge_sha": null,
+      "reason": null,
+      "notes": null
+    },
+    "558": {
+      "title": "feat(storage): allow disabling vacuuming in SQLiteStorage",
+      "author": "penggrin12",
+      "head": "penggrin12:optional-sqlite-vacuum",
+      "reviewed_head_sha": null,
+      "seen_head_sha": "eab7cf21208415d7c504302ae54cd64d2f31acc1",
+      "closes": [],
+      "status": "pending",
+      "fork_commit": null,
+      "upstream_merge_sha": null,
+      "reason": null,
+      "notes": null
+    },
+    "559": {
+      "title": "feat(client): allow setting tcp retry params",
+      "author": "hittiks",
+      "head": "hittiks:main",
+      "reviewed_head_sha": null,
+      "seen_head_sha": "25a5af91d810b3555f03d03b8bfef9caac5e697e",
+      "closes": [],
+      "status": "pending",
+      "fork_commit": null,
+      "upstream_merge_sha": null,
+      "reason": null,
+      "notes": "Head branch is the contributor's `main`."
+    }
+  },
+  "issues": {
+    "62": {
+      "title": "download_media(), the file size equals to 0 B",
+      "status": "pending",
+      "addressed_by": null,
+      "notes": null
+    },
+    "109": {
+      "title": "Pyrogram Rework",
+      "status": "pending",
+      "addressed_by": null,
+      "notes": "Umbrella discussion; nothing actionable on its own."
+    },
+    "143": {
+      "title": "Issue with markdown unparse and parse",
+      "status": "pending",
+      "addressed_by": [
+        552
+      ],
+      "notes": null
+    },
+    "150": {
+      "title": "Rename the module to kurigram",
+      "status": "pending",
+      "addressed_by": null,
+      "notes": "Module rename; would break every import. Follow upstream, never lead."
+    },
+    "160": {
+      "title": "Session layer problems",
+      "status": "pending",
+      "addressed_by": null,
+      "notes": null
+    },
+    "174": {
+      "title": "Add `TRIGGER_EMOJI_ANIMATION` to ChatAction enums",
+      "status": "pending",
+      "addressed_by": [
+        520
+      ],
+      "notes": null
+    },
+    "202": {
+      "title": "Some problems with InlineQueryResult",
+      "status": "pending",
+      "addressed_by": null,
+      "notes": null
+    },
+    "224": {
+      "title": "Video loading speed is greatly reduced when using version 2.2.10",
+      "status": "pending",
+      "addressed_by": null,
+      "notes": null
+    },
+    "331": {
+      "title": "Message.chat nullability not handled in Message.__parse_reply",
+      "status": "pending",
+      "addressed_by": [
+        556
+      ],
+      "notes": null
+    },
+    "438": {
+      "title": "Opinions wanted: is it worth chasing ruff's ASYNC (flake8-async) findings here?",
+      "status": "pending",
+      "addressed_by": null,
+      "notes": "Discussion, not a bug: ruff ASYNC rules. Track the outcome only."
+    },
+    "478": {
+      "title": "resolve_peer() cannot resolve \"min\" users/channels seen only via channel messages",
+      "status": "pending",
+      "addressed_by": [
+        527,
+        488
+      ],
+      "notes": null
+    },
+    "524": {
+      "title": "`stop()` waits out the updates watchdog, which runs even with `no_updates=True`",
+      "status": "pending",
+      "addressed_by": [
+        525
+      ],
+      "notes": null
+    },
+    "526": {
+      "title": "handle_updates: PERSISTENT_TIMESTAMP_OUTDATED on GetChannelDifference escapes as TimeoutError and drops the whole update batch",
+      "status": "pending",
+      "addressed_by": [
+        557
+      ],
+      "notes": null
+    }
+  },
+  "branches": {
+    "fix/edit-message-reply-markup-removal": {
+      "status": "pending",
+      "notes": "Upstream branch with no PR (one commit, 976cfd50, 2026-09-15, 76 behind main). Review as if it were a PR."
+    }
+  },
+  "decisions": []
+}

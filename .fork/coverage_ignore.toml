@@ -1,0 +1,44 @@
+# Raw functions that should never get a high-level method, as `fnmatch` patterns over the schema
+#  name. Each entry says why, so a pattern that stops being true can be found and dropped. When in
+#  doubt leave a function out of here: a gap that is listed costs a line in the report, and one
+#  that is hidden is never looked at again.
+ignore = [
+    # Connection plumbing that `Session` wraps around every other call.
+    "invokeAfterMsg",
+    "invokeAfterMsgs",
+    "invokeWithLayer",
+    "invokeWithoutUpdates",
+    "invokeWithMessagesRange",
+    "invokeWithTakeout",
+    "invokeWithBusinessConnection",
+    "invokeWithGooglePlayIntegrity",
+    "invokeWithApnsSecret",
+    "invokeWithReCaptcha",
+    "initConnection",
+    # Perfect forward secrecy keys, a transport concern rather than something a caller asks for.
+    "auth.bindTempAuthKey",
+    "auth.dropTempAuthKeys",
+    # Login through Firebase or Play Integrity attestation, which only the official apps can pass.
+    "auth.*Firebase*",
+    # The official apps' own housekeeping: update checks, crash logs, DC hints, proxy sponsors.
+    "help.getAppUpdate",
+    "help.saveAppLog",
+    "help.getNearestDc",
+    "help.getPromoData",
+    "help.hidePromoData",
+    "help.getInviteText",
+    "help.getRecentMeUrls",
+    "help.setBotUpdatesStatus",
+    # Callable by Telegram support staff only.
+    "help.getSupportName",
+    "help.getUserInfo",
+    "help.editUserInfo",
+    # Interface translations for the apps.
+    "langpack.*",
+    # The Android app's program for sending SMS on Telegram's behalf.
+    "smsjobs.*",
+    # CDN hash checks, part of downloading rather than a call of its own.
+    "upload.getFileHashes",
+    # Test-server only.
+    "test.*",
+]

@@ -228,8 +228,9 @@ Bot API features that are only name gaps, which are cheap, then `messages`, `pay
 
 - **Commits:** Conventional Commits with a scope, and identifiers in backticks
   (``fix(types): accept `None` in `User._parse()` ``). The subject says what changes and why.
-- **No attribution trailers** such as `Co-Authored-By` or `Claude-Session`. The only trailers
-  allowed are `Upstream-PR:` and `Fork-only:`.
+- **No attribution** such as `Co-Authored-By` or `Claude-Session` trailers in commits, and no
+  "Generated with Claude Code" line or other tool signature in PRs, issues or release notes. The
+  only trailers allowed are `Upstream-PR:` and `Fork-only:`.
 - **Generated code:** never hand-edit `pyrogram/raw/` or `pyrogram/errors/exceptions/`. Fix
   `compiler/` instead.
 - **Gate before every push:** `make api && make lint && make typecheck && make test-unit`. Don't

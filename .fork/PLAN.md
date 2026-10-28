@@ -249,7 +249,7 @@ project.
 - Rebase or merge integration (§1). The default is rebase.
 - Whether to delete the mirrored upstream branches from `origin` once they're in the ledger (§3).
 - Switching the `fast` extra from `tgcrypto>=1.2.2` to `tgcrypto-pyrofork>=1.2.9` (the fork at
-  `Alb0204/tgcrypto-pyrofork`). The original `tgcrypto` has no wheels past cp313, and both
+  `Alb0204/tgcrypto-pyrofork`). The original `tgcrypto` (1.2.5) has no wheels past cp311, and both
   distributions install the same `tgcrypto` module, so a project that pulls in both gets one
   overwriting the other's files. This would be a `Fork-only` commit worth offering upstream.
 - Whether to send fork-only fixes back upstream as PRs. This is optional, and the ledger supports

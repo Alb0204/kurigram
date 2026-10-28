@@ -496,7 +496,7 @@
       "title": "download_media(), the file size equals to 0 B",
       "status": "pending",
       "addressed_by": [
-        "#555"
+        555
       ],
       "notes": "Partly: #555 refs it and stops the 0 B file; the original timeout already raises since upstream #310."
     },
@@ -550,7 +550,7 @@
       "title": "Message.chat nullability not handled in Message.__parse_reply",
       "status": "adopted",
       "addressed_by": [
-        "#556"
+        556
       ],
       "notes": null
     },
@@ -573,7 +573,7 @@
       "title": "`stop()` waits out the updates watchdog, which runs even with `no_updates=True`",
       "status": "adopted",
       "addressed_by": [
-        "#525"
+        525
       ],
       "notes": null
     },
@@ -581,7 +581,7 @@
       "title": "handle_updates: PERSISTENT_TIMESTAMP_OUTDATED on GetChannelDifference escapes as TimeoutError and drops the whole update batch",
       "status": "adopted",
       "addressed_by": [
-        "#557"
+        557
       ],
       "notes": null
     }

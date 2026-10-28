@@ -2,6 +2,7 @@
 
 One dated line per non-obvious call, newest first. Status alone lives in `ledger.json`.
 
+- 2026-10-29: Adopted #548 although it removes `GiftAttribute.date`, `caption`, `caption_entities`, `from_user` and `to_user`: only an unreachable, broken branch ever set them, and none of the user's projects read them.
 - 2026-10-29: Coverage baseline: layer 232 (0 behind), 490 of 819 tracked raw functions unwrapped, 141 Bot API 10.3 names with no counterpart (34 methods, 107 types). Type parity is by name and kurigram names types after TDLib, so most type gaps are naming, not missing features; only verified mappings are aliased.
 - 2026-10-28: The fork only reads from upstream: no pushes, PRs, issues or comments there.
 - 2026-10-28: Deleted the 26 mirrored upstream branches from `origin`; their head SHAs are in the ledger.

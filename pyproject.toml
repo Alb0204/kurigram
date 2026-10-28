@@ -72,10 +72,11 @@ Community = "https://t.me/kurigram_chat"
 
 [project.optional-dependencies]
 fast = [
-    # 1.2.1 shipped no sdist and no wheel past `cp38`, so it cannot be installed on a
-    #  current interpreter at all, while 1.2.0 below it and 1.2.2 above it both can. The
-    #  floor sits above that hole rather than at the oldest working release.
-    "tgcrypto>=1.2.2",
+    # The original `tgcrypto` stopped at `cp311` wheels, and the PyPI `tgcrypto-pyrofork` at
+    #  1.2.8 without macOS wheels. 1.2.9 is the fork's own build with wheels through 3.15 and
+    #  3.15t, published as GitHub release assets only: see `[tool.uv]` below. It installs the
+    #  same `tgcrypto` module, so `pyrogram/crypto/aes.py` is unchanged.
+    "tgcrypto-pyrofork>=1.2.9",
     "uvloop>=0.21.0; sys_platform == 'darwin' or sys_platform == 'linux'",
 ]
 
@@ -192,6 +193,12 @@ include = [
 [tool.hatch.build.targets.wheel]
 ignore-vcs = true
 packages = ["pyrogram"]
+
+# `tgcrypto-pyrofork` 1.2.9 is not on PyPI, whose name belongs to the dead upstream. `uv lock`,
+#  `uv sync` and `uv pip install` all read this, so `make test-floor` and `make test-ceil` find it
+#  too; a plain `pip install kurigram[fast]` needs `--find-links` with the same URL.
+[tool.uv]
+find-links = ["https://github.com/Alb0204/tgcrypto-pyrofork/releases/expanded_assets/v1.2.9"]
 
 [tool.ruff]
 # 100 is where the hand-written tree already sits: p95 is 87 columns and the tail runs to

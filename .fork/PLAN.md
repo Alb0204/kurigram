@@ -256,5 +256,7 @@ project.
 - The `fast` extra depends on `tgcrypto-pyrofork>=1.2.9` from `Alb0204/tgcrypto-pyrofork`
   (`Fork-only: tgcrypto-pyrofork`). The original `tgcrypto` (1.2.5) has no wheels past cp311, and
   both distributions install the same `tgcrypto` module, so pulling in both makes one overwrite the
-  other's files.
+  other's files. 1.2.9 lives only on the fork's GitHub releases: `[tool.uv] find-links` covers
+  uv, and pip users pass `--find-links https://github.com/Alb0204/tgcrypto-pyrofork/releases/expanded_assets/v1.2.9`.
+  Bump that URL together with the floor on every tgcrypto-pyrofork release.
 - Nothing is contributed upstream (the rule at the top of this file).

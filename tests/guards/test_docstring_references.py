@@ -40,7 +40,7 @@ from tests.guards.name_resolution import (
 
 if TYPE_CHECKING:
     import pathlib
-    from collections.abc import Iterable, Iterator
+    from collections.abc import Generator, Iterable
 
 # `:obj:`Message`` and `:py:obj:`Message`` are the same role, the second one naming the
 #  domain the first one inherits.
@@ -83,7 +83,7 @@ def components(dotted: str) -> list[str]:
     return dotted.strip().lstrip("~.").rstrip("()").split(".")
 
 
-def references_in(text: str) -> Iterator[tuple[str | None, str]]:
+def references_in(text: str) -> Generator[tuple[str | None, str]]:
     """Take the label and the target out of every cross-reference in `text`."""
     for body in _CROSS_REFERENCE.findall(text):
         # A reference is either a target with the text to print in front of it, or a bare
@@ -113,7 +113,7 @@ def label_agrees_with_target(label: str, *, target: str) -> bool:
     return label_parts == components(target)[-len(label_parts) :]
 
 
-def docstrings_of(path: pathlib.Path) -> Iterator[tuple[str, int]]:
+def docstrings_of(path: pathlib.Path) -> Generator[tuple[str, int]]:
     lines = source_of(path).splitlines()
 
     for node in ast.walk(ast.parse("\n".join(lines))):

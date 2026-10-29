@@ -287,3 +287,6 @@ include = ["tests/unit/utils/test_peers.py"]
 
 [tool.ty.overrides.rules]
 invalid-argument-type = "error"
+
+[tool.ty.environment]
+python-version = "3.14"

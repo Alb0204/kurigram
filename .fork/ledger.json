@@ -83,13 +83,13 @@
       "title": "refactor(types): make `_parse*` helpers return their type and raise `EmptyObjectError` on empty constructors",
       "author": "Danipulok",
       "head": "kurigram-org:refactor/parsers-raise-on-empty",
-      "reviewed_head_sha": null,
+      "reviewed_head_sha": "8048ff78f8332a8ac6210592854754e5bb3cbced",
       "seen_head_sha": "8048ff78f8332a8ac6210592854754e5bb3cbced",
       "closes": [],
-      "status": "pending",
+      "status": "deferred",
       "fork_commit": null,
       "upstream_merge_sha": null,
-      "reason": null,
+      "reason": "162-file refactor that changes behaviour (empty constructors raise the new EmptyObjectError instead of returning None) and is not reviewed upstream. It conflicts in 10 files with #543, #544, #545, #546, #548 and #557, adopted first. Resolving it here would leave the fork carrying its own version of a huge diff. Revisit when upstream merges it or the author rebases.",
       "notes": null
     },
     "523": {
@@ -360,53 +360,53 @@
       "title": "refactor(parser): rewrite the HTML and Markdown parsers on one entity spec table",
       "author": "Danipulok",
       "head": "kurigram-org:refactor/parser",
-      "reviewed_head_sha": null,
+      "reviewed_head_sha": "c79b410d26db32d5d6096b21fe240f940a5a8b4d",
       "seen_head_sha": "c79b410d26db32d5d6096b21fe240f940a5a8b4d",
       "closes": [],
-      "status": "pending",
-      "fork_commit": null,
+      "status": "adopted",
+      "fork_commit": "ca411584",
       "upstream_merge_sha": null,
       "reason": null,
-      "notes": null
+      "notes": "Old vs new parser on a 35-case corpus of common HTML/Markdown: 29 unchanged, including every legacy form (<spoiler>, <pre language>, <emoji id>). The six differences are the five behaviour changes the description states, plus a fence newline that no longer leaks into the text."
     },
     "550": {
       "title": "refactor(typing): annotate generators as `Generator`/`AsyncGenerator` instead of `Iterator`",
       "author": "Danipulok",
       "head": "kurigram-org:refactor/sync-generators",
-      "reviewed_head_sha": null,
+      "reviewed_head_sha": "9aa679ae46070cda49d013f3b60657d2b719f94a",
       "seen_head_sha": "9aa679ae46070cda49d013f3b60657d2b719f94a",
       "closes": [],
-      "status": "pending",
-      "fork_commit": null,
+      "status": "adopted",
+      "fork_commit": "d61aacda",
       "upstream_merge_sha": null,
       "reason": null,
-      "notes": null
+      "notes": "Fork resolved two guard-module conflicts with #536 (kept generated_files() and the Iterable import)."
     },
     "551": {
       "title": "test(guards): hold class `Parameters:` blocks against `__init__` and reject an entry documented twice",
       "author": "Danipulok",
       "head": "kurigram-org:test/docstring-guard-classes-duplicates",
-      "reviewed_head_sha": null,
+      "reviewed_head_sha": "03e3716cda9753325ad7984efb354199218baa01",
       "seen_head_sha": "03e3716cda9753325ad7984efb354199218baa01",
       "closes": [],
-      "status": "pending",
-      "fork_commit": null,
+      "status": "adopted",
+      "fork_commit": "36f192f8",
       "upstream_merge_sha": null,
       "reason": null,
-      "notes": null
+      "notes": "Fork took this PR's documented_functions() rewrite over #550's re-annotation. Guard fails with the 73 docstring fixes held back (2 failures); the stricter guard passes over everything adopted earlier."
     },
     "552": {
       "title": "fix(parser): make Markdown `unparse` then `parse` return the same message, pinned by a round-trip corpus",
       "author": "Danipulok",
       "head": "kurigram-org:test/markdown-round-trip-corpus",
-      "reviewed_head_sha": null,
+      "reviewed_head_sha": "80bd98ab6e560d3d5316e9c643e7d1b6c31eaa35",
       "seen_head_sha": "80bd98ab6e560d3d5316e9c643e7d1b6c31eaa35",
       "closes": [],
-      "status": "pending",
-      "fork_commit": null,
+      "status": "adopted",
+      "fork_commit": "420a0fc7",
       "upstream_merge_sha": null,
       "reason": null,
-      "notes": "Stacked on #549 (contains every refactor/parser commit); review #549 first."
+      "notes": "Applied as the diff from #549's head, which this stacks on. 45 tests fail without. A reviewer's random round-trip test shows 71.3% -> 0.1% failures; the leftovers are edge cases the PR lists."
     },
     "553": {
       "title": "build(deps): bump urllib3 from 2.7.0 to 2.8.0",
@@ -508,8 +508,9 @@
     },
     "143": {
       "title": "Issue with markdown unparse and parse",
-      "status": "pending",
+      "status": "adopted",
       "addressed_by": [
+        549,
         552
       ],
       "notes": null

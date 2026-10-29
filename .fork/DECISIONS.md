@@ -2,6 +2,7 @@
 
 One dated line per non-obvious call, newest first. Status alone lives in `ledger.json`.
 
+- 2026-10-29: Finished the first pass over all 36 open upstream pull requests: 28 adopted, 8 deferred (#521, #523, #488, #527, #471, #450, #479, #559), none rejected. Each deferral has its reason in `ledger.json`.
 - 2026-10-29: Deferred #521 rather than resolve its 10 conflicts here: a 162-file, unreviewed refactor carried in a fork-specific form would collide with whatever upstream finally merges.
 - 2026-10-29: Adopted #548 although it removes `GiftAttribute.date`, `caption`, `caption_entities`, `from_user` and `to_user`: only an unreachable, broken branch ever set them, and none of the user's projects read them.
 - 2026-10-29: Coverage baseline: layer 232 (0 behind), 490 of 819 tracked raw functions unwrapped, 141 Bot API 10.3 names with no counterpart (34 methods, 107 types). Type parity is by name and kurigram names types after TDLib, so most type gaps are naming, not missing features; only verified mappings are aliased.

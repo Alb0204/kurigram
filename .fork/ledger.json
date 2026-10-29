@@ -16,68 +16,68 @@
       "title": "fix(async): route local file I/O through aiofiles, enable ruff's ASYNC rule",
       "author": "KrimsN",
       "head": "KrimsN:feature/aiofiles-async-ruff",
-      "reviewed_head_sha": null,
+      "reviewed_head_sha": "e02214a591c8481ffec4de49d7cff4b4d49abbb0",
       "seen_head_sha": "e02214a591c8481ffec4de49d7cff4b4d49abbb0",
       "closes": [],
-      "status": "pending",
+      "status": "deferred",
       "fork_commit": null,
       "upstream_merge_sha": null,
-      "reason": null,
+      "reason": "Stale: still carries #449's pre-squash commits (#449 merged 2026-09-11), 37 conflicting files. Adds aiofiles as a new runtime dependency. Revisit after the author rebases.",
       "notes": null
     },
     "471": {
       "title": "feat(client): add `get_user()` and `get_message()`, and raise from `get_chat()` instead of answering `None`",
       "author": "Danipulok",
       "head": "kurigram-org:fix/get-users-get-chat-none",
-      "reviewed_head_sha": null,
+      "reviewed_head_sha": "51a75f217b49fa76679459b19f83f402b0791a2c",
       "seen_head_sha": "51a75f217b49fa76679459b19f83f402b0791a2c",
       "closes": [],
-      "status": "pending",
+      "status": "deferred",
       "fork_commit": null,
       "upstream_merge_sha": null,
-      "reason": null,
+      "reason": "Behaviour changes on top of the new methods: get_chat() raises where it was documented to return None, and get_users([...]) drops missing users instead of returning None in their place, silently misaligning callers that zip ids with results. Conflicts with #543 in test_chat.py.",
       "notes": null
     },
     "479": {
       "title": "fix(session): harden packet unpack and update difference sync against…",
       "author": "mr-dariush",
       "head": "mr-dariush:fix/mtproto-unknown-constructor-resilience",
-      "reviewed_head_sha": null,
+      "reviewed_head_sha": "ff21adc2fb353fb84fad7c8885d361fa54972031",
       "seen_head_sha": "ff21adc2fb353fb84fad7c8885d361fa54972031",
       "closes": [],
-      "status": "pending",
+      "status": "deferred",
       "fork_commit": null,
       "upstream_merge_sha": null,
-      "reason": null,
+      "reason": "Maintainer CHANGES_REQUESTED 2026-09-24, two minutes after its last commit; nothing pushed since.",
       "notes": null
     },
     "488": {
       "title": "fix(peers): accept `*FromMessage` peers and send `InputUser`/`InputChannel` where expected",
       "author": "eeeob",
       "head": "eeeob:fix/input-peer-user-from-message",
-      "reviewed_head_sha": null,
+      "reviewed_head_sha": "8d6f1b6077c5765a494cc8bb53cfae94045c8b22",
       "seen_head_sha": "8d6f1b6077c5765a494cc8bb53cfae94045c8b22",
       "closes": [],
-      "status": "pending",
+      "status": "deferred",
       "fork_commit": null,
       "upstream_merge_sha": null,
-      "reason": null,
+      "reason": "Maintainer CHANGES_REQUESTED (2026-09-24) not followed by a re-review after the author's 2026-10-06 rework. 123 files of peer handling. Conflicts with #541 and #549; its one parser line would need carrying into the rewritten html.py (wrap resolve_peer in get_input_user_or_channel). Revisit on re-review.",
       "notes": null
     },
     "520": {
       "title": "feat(messages): expose the emoji-interaction chat actions through a `ChatAction` type family",
       "author": "Danipulok",
       "head": "kurigram-org:feat/chat-action-emoji-interaction",
-      "reviewed_head_sha": null,
+      "reviewed_head_sha": "c39d1ec78641271e8d6a069de41bf0a9e951f6ce",
       "seen_head_sha": "c39d1ec78641271e8d6a069de41bf0a9e951f6ce",
       "closes": [
         174
       ],
-      "status": "pending",
-      "fork_commit": null,
+      "status": "adopted",
+      "fork_commit": "53ab269d",
       "upstream_merge_sha": null,
       "reason": null,
-      "notes": "Closes #174. Branch is 41 commits behind upstream/main; rebase before review."
+      "notes": "Additive; enums.ChatAction path unchanged. Tests error without."
     },
     "521": {
       "title": "refactor(types): make `_parse*` helpers return their type and raise `EmptyObjectError` on empty constructors",
@@ -96,13 +96,13 @@
       "title": "Add HTML and Markdown serialization for rich messages",
       "author": "yehuda-lev",
       "head": "yehuda-lev:codex/rich-message-formatting-clean",
-      "reviewed_head_sha": null,
+      "reviewed_head_sha": "c7072edd58dd10db6a82759e0b3f88da1d9541fd",
       "seen_head_sha": "c7072edd58dd10db6a82759e0b3f88da1d9541fd",
       "closes": [],
-      "status": "pending",
+      "status": "deferred",
       "fork_commit": null,
       "upstream_merge_sha": null,
-      "reason": null,
+      "reason": "Built on #521's branch (refactor/parsers-raise-on-empty); only its last commit c7072edd is its own and it needs #521's API (utils/parsing.py removed). Waits for #521.",
       "notes": null
     },
     "525": {
@@ -124,15 +124,15 @@
       "title": "feat(peers): resolve `min` users and channels through the messages they were seen in",
       "author": "eeeob",
       "head": "eeeob:feat/resolve-min-peers-from-message",
-      "reviewed_head_sha": null,
+      "reviewed_head_sha": "273da83ca6494490e5f3045f1f6ffbefde2dbf05",
       "seen_head_sha": "273da83ca6494490e5f3045f1f6ffbefde2dbf05",
       "closes": [
         478
       ],
-      "status": "pending",
+      "status": "deferred",
       "fork_commit": null,
       "upstream_merge_sha": null,
-      "reason": null,
+      "reason": "Stacked on #488 and unsafe without it: its own description says delete_messages() would treat a min channel as a private chat. Waits for #488.",
       "notes": null
     },
     "532": {
@@ -468,26 +468,26 @@
       "title": "feat(storage): allow disabling vacuuming in SQLiteStorage",
       "author": "penggrin12",
       "head": "penggrin12:optional-sqlite-vacuum",
-      "reviewed_head_sha": null,
+      "reviewed_head_sha": "eab7cf21208415d7c504302ae54cd64d2f31acc1",
       "seen_head_sha": "eab7cf21208415d7c504302ae54cd64d2f31acc1",
       "closes": [],
-      "status": "pending",
-      "fork_commit": null,
+      "status": "adopted",
+      "fork_commit": "1373837c",
       "upstream_merge_sha": null,
       "reason": null,
-      "notes": null
+      "notes": "Default-preserving. The PR had no test; the fork added one that traces open()'s statements (fails without, passes with). Like use_wal, it is not exposed on Client."
     },
     "559": {
       "title": "feat(client): allow setting tcp retry params",
       "author": "hittiks",
       "head": "hittiks:main",
-      "reviewed_head_sha": null,
+      "reviewed_head_sha": "25a5af91d810b3555f03d03b8bfef9caac5e697e",
       "seen_head_sha": "25a5af91d810b3555f03d03b8bfef9caac5e697e",
       "closes": [],
-      "status": "pending",
+      "status": "deferred",
       "fork_commit": null,
       "upstream_merge_sha": null,
-      "reason": null,
+      "reason": "retries=0 would send nothing: Session.invoke counts attempts (range(1, retries + 1)), but the author's review reply treats 0 as 'no retries', and a client-wide default makes that easy to hit. The new parameters sit before sleep_threshold, shifting every later positional parameter. Media and inline sessions that call session.invoke directly ignore them. No tests. Still in community review (2026-10-26).",
       "notes": "Head branch is the contributor's `main`."
     }
   },
@@ -529,7 +529,7 @@
     },
     "174": {
       "title": "Add `TRIGGER_EMOJI_ANIMATION` to ChatAction enums",
-      "status": "pending",
+      "status": "adopted",
       "addressed_by": [
         520
       ],

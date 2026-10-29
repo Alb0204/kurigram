@@ -3,8 +3,8 @@
 | Number | Now | Baseline |
 |--------|-----|----------|
 | `layers_behind` | 0 | 0 |
-| `raw_unwrapped` | 490 | 490 |
-| `bot_api_gaps` | 141 | 140 |
+| `raw_unwrapped` | 489 | 490 |
+| `bot_api_gaps` | 141 | 141 |
 
 ## Layer drift
 
@@ -14,11 +14,11 @@ Every combinator matches.
 
 ## Raw API coverage
 
-329 of 819 tracked raw functions are called by a high-level method; 490 are not. `coverage_ignore.toml` leaves out the ones that should never get a wrapper.
+330 of 819 tracked raw functions are called by a high-level method; 489 are not. `coverage_ignore.toml` leaves out the ones that should never get a wrapper.
 
 | Namespace | Unwrapped | Tracked |
 |-----------|-----------|---------|
-| messages | 141 | 261 |
+| messages | 140 | 261 |
 | account | 96 | 128 |
 | phone | 42 | 43 |
 | payments | 40 | 76 |
@@ -308,7 +308,7 @@ Every combinator matches.
 
 </details>
 
-<details><summary>messages (141)</summary>
+<details><summary>messages (140)</summary>
 
 - `messages.acceptEncryption`
 - `messages.acceptUrlAuth`
@@ -358,7 +358,6 @@ Every combinator matches.
 - `messages.getFeaturedEmojiStickers`
 - `messages.getFeaturedStickers`
 - `messages.getFutureChatCreatorAfterLeave`
-- `messages.getInlineGameHighScores`
 - `messages.getMaskStickers`
 - `messages.getMessageEditData`
 - `messages.getMessageReactionsList`

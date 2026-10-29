@@ -1,8 +1,8 @@
 {
   "schema": 1,
   "upstream": "kurigram-org/kurigram",
-  "last_synced_upstream_main": "80aa42d45a699faaea2d048fe3740742abe34438",
-  "last_reviewed": "2026-10-28",
+  "last_synced_upstream_main": "7b81e4974e2bdd9554ac7906953897b1c8696387",
+  "last_reviewed": "2026-10-29",
   "statuses": {
     "pending": "not reviewed yet",
     "adopted": "merged into the fork; `fork_commit` set",
@@ -74,7 +74,7 @@
         174
       ],
       "status": "adopted",
-      "fork_commit": "53ab269d",
+      "fork_commit": "cf35b251",
       "upstream_merge_sha": null,
       "reason": null,
       "notes": "Additive; enums.ChatAction path unchanged. Tests error without."
@@ -115,7 +115,7 @@
         524
       ],
       "status": "adopted",
-      "fork_commit": "477fe0ab",
+      "fork_commit": "0ab2849a",
       "upstream_merge_sha": null,
       "reason": null,
       "notes": "Tests fail without. Minor: contextlib.suppress(CancelledError) would also swallow a cancellation of terminate() itself."
@@ -143,7 +143,7 @@
       "seen_head_sha": "693b734e659ef9d110ab85e47060d678d35717eb",
       "closes": [],
       "status": "adopted",
-      "fork_commit": "349fa1f7",
+      "fork_commit": "b3b94565",
       "upstream_merge_sha": null,
       "reason": null,
       "notes": "All 10 shared-bit constructors built outside pyrogram/raw checked at their call sites: both members or neither, as claimed. New tests fail without (8 of 18, API recompiled each side). Fork merged tests/unit/methods/bots/conftest.py with #541's."
@@ -156,7 +156,7 @@
       "seen_head_sha": "920460bc4019f869fede8898c705e564b2b20386",
       "closes": [],
       "status": "adopted",
-      "fork_commit": "91391b44",
+      "fork_commit": "6f70aa15",
       "upstream_merge_sha": null,
       "reason": null,
       "notes": "Both ids confirmed in tdlib/td (NetQueryDelayer.cpp, QuickReplyManager.cpp). Not retried by Session, same as the generic Flood before."
@@ -169,7 +169,7 @@
       "seen_head_sha": "1aa33ea86b891e2877f1ec22da162fb9a3119237",
       "closes": [],
       "status": "adopted",
-      "fork_commit": "dc8ba331",
+      "fork_commit": "8624e654",
       "upstream_merge_sha": null,
       "reason": null,
       "notes": "Every SHA checked against its tag with git ls-remote. The fork pinned fork-coverage.yml the same way (a82c55df)."
@@ -182,7 +182,7 @@
       "seen_head_sha": "cb3112eeb7b5086b931ca05d0690db1a048498cd",
       "closes": [],
       "status": "adopted",
-      "fork_commit": "fa6c9314",
+      "fork_commit": "b599027d",
       "upstream_merge_sha": null,
       "reason": null,
       "notes": "Decorator list matches the 30 on_* modules. UNLISTED_CLIENT_METHODS is documentation only, nothing reads it; recount on fork main: no pyrogram/methods method unlisted."
@@ -195,7 +195,7 @@
       "seen_head_sha": "e9100990a1e32897d7fefd96131060edb2ae8a31",
       "closes": [],
       "status": "adopted",
-      "fork_commit": "c7ffb618",
+      "fork_commit": "6141d754",
       "upstream_merge_sha": null,
       "reason": null,
       "notes": "New generated-docstring guard fails without the compiler change (2 failures) and passes with it."
@@ -208,7 +208,7 @@
       "seen_head_sha": "fa477676436ea3c25d1d7d92b1e462a01d993e09",
       "closes": [],
       "status": "adopted",
-      "fork_commit": "fa120561",
+      "fork_commit": "0dbee268",
       "upstream_merge_sha": null,
       "reason": null,
       "notes": "New guard fails on the 5 old citations and passes after."
@@ -221,7 +221,7 @@
       "seen_head_sha": "550641806576ffa33a016872a3403399dddc332b",
       "closes": [],
       "status": "adopted",
-      "fork_commit": "6b5664a2",
+      "fork_commit": "02ca548d",
       "upstream_merge_sha": null,
       "reason": null,
       "notes": null
@@ -234,7 +234,7 @@
       "seen_head_sha": "8795e6ddb3626c7ac02d91ae7d4513e52b70f0d4",
       "closes": [],
       "status": "adopted",
-      "fork_commit": "8ebd9334",
+      "fork_commit": "34e5ebc0",
       "upstream_merge_sha": null,
       "reason": null,
       "notes": "Not exercised here: docs/source is not in the repository, so make docs cannot run on the fork."
@@ -247,7 +247,7 @@
       "seen_head_sha": "d0272964f137104a88f47bab2a251fff4dbd4b6e",
       "closes": [],
       "status": "adopted",
-      "fork_commit": "14896b5a",
+      "fork_commit": "86042a1d",
       "upstream_merge_sha": null,
       "reason": null,
       "notes": "Block is identical to send_audio()'s."
@@ -260,7 +260,7 @@
       "seen_head_sha": "575247c9685b96a049d8fd224645c624a0f850f2",
       "closes": [],
       "status": "adopted",
-      "fork_commit": "0cf64c8e",
+      "fork_commit": "588956ed",
       "upstream_merge_sha": null,
       "reason": null,
       "notes": "Same DC/media-session pattern as set_game_score and edit_inline_*. Tests fail without (6 of 7)."
@@ -273,7 +273,7 @@
       "seen_head_sha": "fba5d23f0bac4e88361709291a56ba999b3b2191",
       "closes": [],
       "status": "adopted",
-      "fork_commit": "49d9fe00",
+      "fork_commit": "69ebb75e",
       "upstream_merge_sha": null,
       "reason": null,
       "notes": "Annotation-only, no test; checked by ty."
@@ -286,7 +286,7 @@
       "seen_head_sha": "34545cea0d339fa624d6f4d35e791f537663b73e",
       "closes": [],
       "status": "adopted",
-      "fork_commit": "fd529c7b",
+      "fork_commit": "a01ff3b2",
       "upstream_merge_sha": null,
       "reason": null,
       "notes": "Adds ChatType.COMMUNITY. Test errors without the change."
@@ -299,7 +299,7 @@
       "seen_head_sha": "ddede0796bd81b1023fc8af0a7bf7a9cb677dc48",
       "closes": [],
       "status": "adopted",
-      "fork_commit": "799752a5",
+      "fork_commit": "1201aee3",
       "upstream_merge_sha": null,
       "reason": null,
       "notes": "Test fails without the change (2 of 3). The description says the old code looked peers up in users only; it already checked chats, the bug was User._parse."
@@ -312,7 +312,7 @@
       "seen_head_sha": "4c41fc694804fe50599f0eb2cdbf40f61827bfe9",
       "closes": [],
       "status": "adopted",
-      "fork_commit": "eb4f1f77",
+      "fork_commit": "b9e25aea",
       "upstream_merge_sha": null,
       "reason": null,
       "notes": "Test fails without the change."
@@ -325,7 +325,7 @@
       "seen_head_sha": "7f67042e6e073c8a6e3f03013739d28b975124b5",
       "closes": [],
       "status": "adopted",
-      "fork_commit": "bcaeab3d",
+      "fork_commit": "68429dae",
       "upstream_merge_sha": null,
       "reason": null,
       "notes": "Fork carries one fix on top: the new test cited compiler/api/compiler.py:604, which #537's guard rejects; it names start()'s read_types instead. Test fails without the change (2 of 4)."
@@ -338,7 +338,7 @@
       "seen_head_sha": "5eb64a1f3c5a64e450a7c8cf692107ed1a9e512a",
       "closes": [],
       "status": "adopted",
-      "fork_commit": "06b68191",
+      "fork_commit": "72e344db",
       "upstream_merge_sha": null,
       "reason": null,
       "notes": "The ty override fails on the old annotation and passes on the new one."
@@ -351,7 +351,7 @@
       "seen_head_sha": "04582034a7ec25729f4c4689e3e0b02e953fd9a7",
       "closes": [],
       "status": "adopted",
-      "fork_commit": "7b47de54",
+      "fork_commit": "70cb08a6",
       "upstream_merge_sha": null,
       "reason": null,
       "notes": "Public attribute removal on GiftAttribute (fields were None on every reachable path). None of the user's projects read them. Test fails without the change."
@@ -364,7 +364,7 @@
       "seen_head_sha": "c79b410d26db32d5d6096b21fe240f940a5a8b4d",
       "closes": [],
       "status": "adopted",
-      "fork_commit": "ca411584",
+      "fork_commit": "1c3fbddb",
       "upstream_merge_sha": null,
       "reason": null,
       "notes": "Old vs new parser on a 35-case corpus of common HTML/Markdown: 29 unchanged, including every legacy form (<spoiler>, <pre language>, <emoji id>). The six differences are the five behaviour changes the description states, plus a fence newline that no longer leaks into the text."
@@ -377,7 +377,7 @@
       "seen_head_sha": "9aa679ae46070cda49d013f3b60657d2b719f94a",
       "closes": [],
       "status": "adopted",
-      "fork_commit": "d61aacda",
+      "fork_commit": "4a4a70e2",
       "upstream_merge_sha": null,
       "reason": null,
       "notes": "Fork resolved two guard-module conflicts with #536 (kept generated_files() and the Iterable import)."
@@ -390,7 +390,7 @@
       "seen_head_sha": "03e3716cda9753325ad7984efb354199218baa01",
       "closes": [],
       "status": "adopted",
-      "fork_commit": "36f192f8",
+      "fork_commit": "050e11ac",
       "upstream_merge_sha": null,
       "reason": null,
       "notes": "Fork took this PR's documented_functions() rewrite over #550's re-annotation. Guard fails with the 73 docstring fixes held back (2 failures); the stricter guard passes over everything adopted earlier."
@@ -403,7 +403,7 @@
       "seen_head_sha": "80bd98ab6e560d3d5316e9c643e7d1b6c31eaa35",
       "closes": [],
       "status": "adopted",
-      "fork_commit": "420a0fc7",
+      "fork_commit": "054e1197",
       "upstream_merge_sha": null,
       "reason": null,
       "notes": "Applied as the diff from #549's head, which this stacks on. 45 tests fail without. A reviewer's random round-trip test shows 71.3% -> 0.1% failures; the leftovers are edge cases the PR lists."
@@ -415,11 +415,12 @@
       "reviewed_head_sha": "2ba18afe5698402faca1af18c60eb6cc370d47f4",
       "seen_head_sha": "2ba18afe5698402faca1af18c60eb6cc370d47f4",
       "closes": [],
-      "status": "adopted",
+      "status": "superseded",
       "fork_commit": "b1f62c17",
-      "upstream_merge_sha": null,
-      "reason": null,
-      "notes": "Lock-only bump of a docs-group transitive dependency; uv lock --check clean."
+      "upstream_merge_sha": "be9711b24068d154f0915b98de6efdb4112cf232",
+      "reason": "Upstream merged it as be9711b2; the fork's lock-only commit dropped out of the rebase as already applied.",
+      "notes": "Lock-only bump of a docs-group transitive dependency; uv lock --check clean.",
+      "upstream_closed": "2026-10-29T09:00:35Z"
     },
     "555": {
       "title": "fix(client): fail a download that ends short instead of saving it",
@@ -429,7 +430,7 @@
       "seen_head_sha": "061264c7c432b7c2192670bdf651b207f14ba947",
       "closes": [],
       "status": "adopted",
-      "fork_commit": "74edf7c0",
+      "fork_commit": "9c3ee98b",
       "upstream_merge_sha": null,
       "reason": null,
       "notes": "StopTransmission still returns None (raised before the size check); photo sizes are exact (progressive uses max(sizes)). Test errors without."
@@ -444,7 +445,7 @@
         331
       ],
       "status": "adopted",
-      "fork_commit": "634d19ad",
+      "fork_commit": "c82c3c2c",
       "upstream_merge_sha": null,
       "reason": null,
       "notes": "Every remaining chat access in the parsers is inside a guard. Tests fail without (3 of 20)."
@@ -459,7 +460,7 @@
         526
       ],
       "status": "adopted",
-      "fork_commit": "13888ccb",
+      "fork_commit": "02e752b9",
       "upstream_merge_sha": null,
       "reason": null,
       "notes": "Session.invoke() turns a retried 500 into TimeoutError, confirmed in session.py, so the old PersistentTimestampOutdated except could never fire. Test fails without."
@@ -471,11 +472,12 @@
       "reviewed_head_sha": "eab7cf21208415d7c504302ae54cd64d2f31acc1",
       "seen_head_sha": "eab7cf21208415d7c504302ae54cd64d2f31acc1",
       "closes": [],
-      "status": "adopted",
-      "fork_commit": "1373837c",
-      "upstream_merge_sha": null,
-      "reason": null,
-      "notes": "Default-preserving. The PR had no test; the fork added one that traces open()'s statements (fails without, passes with). Like use_wal, it is not exposed on Client."
+      "status": "superseded",
+      "fork_commit": "8ad4803a",
+      "upstream_merge_sha": "5c4966ac327711038afaba20873d8ff5bda74ba0",
+      "reason": "Upstream merged it as 5c4966ac. The fork keeps only its own test, as a Fork-only commit.",
+      "notes": "Default-preserving. The PR had no test; the fork added one that traces open()'s statements (fails without, passes with). Like use_wal, it is not exposed on Client.",
+      "upstream_closed": "2026-10-29T08:51:45Z"
     },
     "559": {
       "title": "feat(client): allow setting tcp retry params",

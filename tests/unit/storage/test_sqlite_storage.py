@@ -18,10 +18,13 @@
 
 from __future__ import annotations as _annotations
 
+import sqlite3
 from pathlib import Path
+from typing import Any
 
 import pytest
 
+from pyrogram.storage import sqlite_storage
 from pyrogram.storage.sqlite_storage import SQLiteStorage
 
 
@@ -47,3 +50,31 @@ def test_conn_raises_before_open() -> None:
 
     with pytest.raises(RuntimeError):
         _ = storage.conn
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize(("do_vacuum", "vacuumed"), [(True, True), (False, False)])
+async def test_open_vacuums_a_session_file_only_when_asked_to(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    *,
+    do_vacuum: bool,
+    vacuumed: bool,
+) -> None:
+    statements: list[str] = []
+    connect = sqlite3.connect
+
+    # The connection is made inside `open()`, so the trace goes on it as it is made.
+    def traced_connect(*args: Any, **kwargs: Any) -> sqlite3.Connection:
+        connection = connect(*args, **kwargs)
+        connection.set_trace_callback(statements.append)
+        return connection
+
+    monkeypatch.setattr(sqlite_storage.sqlite3, "connect", traced_connect)
+
+    storage = SQLiteStorage("test", tmp_path, do_vacuum=do_vacuum)
+
+    await storage.open()
+    await storage.close()
+
+    assert ("VACUUM" in statements) is vacuumed

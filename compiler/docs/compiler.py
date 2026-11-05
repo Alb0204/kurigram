@@ -329,6 +329,8 @@ def pyrogram_api():
             stop_poll
             retract_vote
             send_dice
+            send_widget
+            send_shared_widget
             search_messages
             search_messages_count
             search_posts

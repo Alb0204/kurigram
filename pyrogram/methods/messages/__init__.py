@@ -74,6 +74,8 @@ from .send_chat_action import SendChatAction
 from .send_checklist import SendChecklist
 from .send_contact import SendContact
 from .send_dice import SendDice
+from .send_shared_widget import SendSharedWidget
+from .send_widget import SendWidget
 from .send_document import SendDocument
 from .send_live_photo import SendLivePhoto
 from .send_location import SendLocation
@@ -173,6 +175,8 @@ class Messages(
     EditInlineMedia,
     EditInlineReplyMarkup,
     SendDice,
+    SendSharedWidget,
+    SendWidget,
     SearchMessages,
     SearchGlobal,
     CopyMessage,

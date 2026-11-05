@@ -345,6 +345,8 @@ def pyrogram_api():
             stream_media
             translate_message_text
             translate_text
+            transcribe_audio_file
+            get_transcription_languages
             get_discussion_message
             get_discussion_replies
             get_discussion_replies_count
@@ -1006,6 +1008,7 @@ def pyrogram_api():
             Dice
             Widget
             WidgetPublicData
+            TranscribedAudio
             Reaction
             RestrictionReason
             RichBlock

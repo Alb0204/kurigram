@@ -1324,6 +1324,8 @@ def pyrogram_api():
             InputTextMessageContent
             InputRichMessageContent
             InputVenueMessageContent
+            InputWidgetMessageContent
+            InputSharedWidgetMessageContent
         """,
         "inline_mode": """
         Inline Mode

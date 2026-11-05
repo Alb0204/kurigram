@@ -200,6 +200,8 @@ from .input_content import (
     InputSticker,
     InputTextMessageContent,
     InputVenueMessageContent,
+    InputWidgetMessageContent,
+    InputSharedWidgetMessageContent,
 )
 from .list import List
 from .messages_and_media import (
@@ -813,6 +815,8 @@ __all__ = [
     "InputRichMessageMedia",
     "InputTextMessageContent",
     "InputVenueMessageContent",
+    "InputWidgetMessageContent",
+    "InputSharedWidgetMessageContent",
     "Invoice",
     "KeyboardButton",
     "KeyboardButtonPollType",

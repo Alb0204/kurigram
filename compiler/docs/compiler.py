@@ -995,6 +995,7 @@ def pyrogram_api():
             ProximityAlertTriggered
             PollOption
             Dice
+            Widget
             Reaction
             RestrictionReason
             RichBlock

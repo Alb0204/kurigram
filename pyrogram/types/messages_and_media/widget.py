@@ -73,7 +73,7 @@ class Widget(Object):
 
         id (``int``, *optional*):
             Identifier of the shared widget, if the widget was sent as a shared one.
-            Its public data can be changed with ``edit_shared_widget_data()``.
+            Its public data can be changed with :meth:`~pyrogram.Client.edit_shared_widget_data`.
 
         public_data (``str``, *optional*):
             State of the widget visible wherever it is shown, including forwards. Up to 1024 bytes.

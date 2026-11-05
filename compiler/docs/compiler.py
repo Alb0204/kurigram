@@ -302,10 +302,13 @@ def pyrogram_api():
             edit_message_checklist
             edit_message_media
             edit_message_reply_markup
+            edit_message_widget_data
+            edit_shared_widget_data
             edit_inline_text
             edit_inline_caption
             edit_inline_media
             edit_inline_reply_markup
+            edit_inline_widget_data
             send_chat_action
             send_checklist
             delete_messages

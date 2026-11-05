@@ -416,6 +416,7 @@ from .messages_and_media import (
     WebAppData,
     WebPage,
     Widget,
+    WidgetPublicData,
     WriteAccessAllowed,
 )
 from .object import Object
@@ -1057,5 +1058,6 @@ __all__ = [
     "WidgetQuery",
     "WebPage",
     "Widget",
+    "WidgetPublicData",
     "WriteAccessAllowed",
 ]

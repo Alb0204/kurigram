@@ -233,6 +233,7 @@ from .voice import Voice
 from .web_app_data import WebAppData
 from .web_page import WebPage
 from .widget import Widget
+from .widget_public_data import WidgetPublicData
 from .write_access_allowed import WriteAccessAllowed
 
 __all__ = [
@@ -449,5 +450,6 @@ __all__ = [
     "WebAppData",
     "WebPage",
     "Widget",
+    "WidgetPublicData",
     "WriteAccessAllowed",
 ]

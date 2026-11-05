@@ -79,7 +79,7 @@ class Widget(Object):
             State of the widget visible wherever it is shown, including forwards. Up to 1024 bytes.
 
         public_data_hash (``int``, *optional*):
-            Hash of the public data, used to ask the server whether it has changed.
+            Hash of the public data, to pass to :meth:`~pyrogram.Client.get_widget_public_data`.
 
         chat_data (``str``, *optional*):
             State of the widget visible only in the chat of the original message. Up to 1024 bytes.

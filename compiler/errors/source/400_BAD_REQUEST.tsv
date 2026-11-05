@@ -299,6 +299,12 @@ INPUT_FETCH_FAIL	Failed deserializing TL payload.
 INPUT_FILE_INVALID	The specified [InputFile](https://core.telegram.org/type/InputFile) is invalid.
 INPUT_FILTER_INVALID	The specified filter is invalid.
 INPUT_LAYER_INVALID	The specified layer is invalid.
+INPUT_MEDIA_WIDGET_DATA_INVALID	The widget `public_data` or `chat_data` is not UTF-8 text without NUL bytes.
+INPUT_MEDIA_WIDGET_DATA_TOO_LARGE	The widget `public_data` or `chat_data` is longer than 1024 bytes.
+INPUT_MEDIA_WIDGET_FWD_ALLOW_QUERIES_NOT_ALLOWED	This bot is not allowed to let forwarded widgets send queries.
+INPUT_MEDIA_WIDGET_HTML_INVALID	The widget HTML is not valid UTF-8 text.
+INPUT_MEDIA_WIDGET_NOT_ALLOWED	Widgets can't be sent here: only bots may send them, and not as drafts or ephemeral messages.
+INPUT_MEDIA_WIDGET_TOO_LARGE	The widget HTML is over 32 KB, or over 4 KB once compressed.
 INPUT_METHOD_INVALID	The method invoked is invalid in the current schema.
 INPUT_PEERS_EMPTY	The specified peer array is empty.
 INPUT_PURPOSE_INVALID	The specified payment purpose is invalid.
@@ -743,4 +749,11 @@ WEBPAGE_URL_INVALID	The specified webpage `url` is invalid.
 WEBPUSH_AUTH_INVALID	The specified web push authentication secret is invalid.
 WEBPUSH_KEY_INVALID	The specified web push elliptic curve Diffie-Hellman public key is invalid.
 WEBPUSH_TOKEN_INVALID	The specified web push token is invalid.
+WIDGET_DATA_INVALID	The widget data or query result is not UTF-8 text without NUL bytes.
+WIDGET_DATA_TOO_LARGE	The widget data is longer than 1024 bytes.
+WIDGET_ID_INVALID	The widget id is unknown or belongs to another bot.
+WIDGET_QUERY_DATA_INVALID	The widget query data is empty or longer than 64 bytes.
+WIDGET_QUERY_NOT_ALLOWED	This widget is not allowed to send queries.
+WIDGET_RESPONSE_TIMEOUT	The bot did not answer the widget query within 15 seconds.
+WIDGET_RESULT_TOO_LARGE	The widget query result is longer than 1024 bytes.
 YOU_BLOCKED_USER	You blocked this user.

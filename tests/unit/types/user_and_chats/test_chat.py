@@ -175,3 +175,26 @@ async def test_an_empty_peer_parses_as_none(
     empty: raw.types.ChatEmpty | raw.types.UserEmpty,
 ) -> None:
     assert await types.Chat._parse_chat(None, empty) is None
+
+
+@pytest.mark.parametrize("forum_sidebar", [True, False])
+@pytest.mark.asyncio
+async def test_a_forum_supergroup_reports_whether_its_topics_sit_in_a_sidebar(
+    forum_sidebar: bool,
+) -> None:
+    # `forum_sidebar` is the `flags2.23` bit layer 233 added to `channel`.
+    channel = raw.types.Channel(
+        id=1,
+        title="Forum",
+        photo=raw.types.ChatPhotoEmpty(),
+        date=0,
+        megagroup=True,
+        forum=True,
+        forum_sidebar=forum_sidebar,
+        restriction_reason=[],
+        usernames=[],
+    )
+
+    chat = await types.Chat._parse_channel_chat(None, channel)
+
+    assert chat.has_forum_sidebar is forum_sidebar

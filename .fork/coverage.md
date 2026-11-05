@@ -3,7 +3,7 @@
 | Number | Now | Baseline |
 |--------|-----|----------|
 | `layers_behind` | 0 | 0 |
-| `raw_unwrapped` | 497 | 489 |
+| `raw_unwrapped` | 489 | 497 |
 | `bot_api_gaps` | 141 | 141 |
 
 ## Layer drift
@@ -14,11 +14,11 @@ Every combinator matches.
 
 ## Raw API coverage
 
-330 of 827 tracked raw functions are called by a high-level method; 497 are not. `coverage_ignore.toml` leaves out the ones that should never get a wrapper.
+338 of 827 tracked raw functions are called by a high-level method; 489 are not. `coverage_ignore.toml` leaves out the ones that should never get a wrapper.
 
 | Namespace | Unwrapped | Tracked |
 |-----------|-----------|---------|
-| messages | 148 | 269 |
+| messages | 140 | 269 |
 | account | 96 | 128 |
 | phone | 42 | 43 |
 | payments | 40 | 76 |
@@ -308,7 +308,7 @@ Every combinator matches.
 
 </details>
 
-<details><summary>messages (148)</summary>
+<details><summary>messages (140)</summary>
 
 - `messages.acceptEncryption`
 - `messages.acceptUrlAuth`
@@ -329,10 +329,7 @@ Every combinator matches.
 - `messages.discardEncryption`
 - `messages.editChatAdmin`
 - `messages.editFactCheck`
-- `messages.editInlineBotMessageWidgetData`
-- `messages.editMessageWidgetData`
 - `messages.editQuickReplyShortcut`
-- `messages.editWidgetData`
 - `messages.getAllDrafts`
 - `messages.getAllStickers`
 - `messages.getArchivedStickers`
@@ -341,7 +338,6 @@ Every combinator matches.
 - `messages.getAttachedStickers`
 - `messages.getAvailableReactions`
 - `messages.getBotApp`
-- `messages.getBotWidgetQueryAnswer`
 - `messages.getDefaultHistoryTTL`
 - `messages.getDefaultTagReactions`
 - `messages.getDhConfig`
@@ -389,13 +385,11 @@ Every combinator matches.
 - `messages.getStickers`
 - `messages.getSuggestedDialogFilters`
 - `messages.getTopReactions`
-- `messages.getTranscriptionLangs`
 - `messages.getUnreadMentions`
 - `messages.getUnreadPollVotes`
 - `messages.getUnreadReactions`
 - `messages.getWebPage`
 - `messages.getWebPagePreview`
-- `messages.getWidgetPublicData`
 - `messages.hidePeerSettingsBar`
 - `messages.initHistoryImport`
 - `messages.migrateChat`
@@ -436,7 +430,6 @@ Every combinator matches.
 - `messages.sendQuickReplyMessages`
 - `messages.sendScheduledMessages`
 - `messages.sendWebViewData`
-- `messages.setBotWidgetQueryAnswer`
 - `messages.setChatAvailableReactions`
 - `messages.setChatTheme`
 - `messages.setChatWallPaper`
@@ -452,7 +445,6 @@ Every combinator matches.
 - `messages.toggleSavedDialogPin`
 - `messages.toggleStickerSets`
 - `messages.transcribeAudio`
-- `messages.transcribeAudioFile`
 - `messages.translateRichMessage`
 - `messages.updateSavedReactionTag`
 - `messages.uploadEncryptedFile`

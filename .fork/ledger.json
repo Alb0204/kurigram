@@ -604,7 +604,7 @@
     },
     "feat/layer-233": {
       "status": "fork-only",
-      "notes": "API layer 233 ahead of upstream (still on 232 at 77212d04): schema taken verbatim from tdesktop `dev`, then high-level support for widget messages, forum sidebars and audio-file transcription, one commit per concern.",
+      "notes": "API layer 233 ahead of upstream (still on 232 at 77212d04): schema taken verbatim from tdesktop `dev`, then forum sidebar flags, widget errors, `Widget` parsing, send/shared send, `WidgetQuery` with its handler and answer, data edits, user-side query and public data getters, inline widget contents, and audio-file transcription, one commit per concern. Not covered: `updateMessageWidgetData` and `updateTranscribedAudioFile` reach handlers only as raw updates; `updateEditForumTopic` and `userWallet` have no high-level counterpart; the TON wallet `query_type` stays on `WidgetQuery.raw`.",
       "reviewed_head_sha": null,
       "reason": null
     }

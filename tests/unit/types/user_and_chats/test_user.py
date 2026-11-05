@@ -24,7 +24,7 @@ from typing import Final, Protocol
 
 import pytest
 
-from pyrogram import enums
+from pyrogram import enums, raw, types
 from pyrogram.types.user_and_chats.user import Link
 
 _URL: Final[str] = "https://example.com"
@@ -74,3 +74,15 @@ def test_pickling_a_link_preserves_its_url_text_and_style(protocol: int) -> None
     round_tripped: Link = pickle.loads(pickle.dumps(_LINK, protocol))
 
     assert state(round_tripped) == state(_LINK)
+
+
+@pytest.mark.parametrize("bot_forum_sidebar", [True, False])
+@pytest.mark.asyncio
+async def test_a_bot_reports_whether_its_topics_sit_in_a_sidebar(bot_forum_sidebar: bool) -> None:
+    # `bot_forum_sidebar` is the `flags2.22` bit layer 233 added to `user`.
+    user = raw.types.User(id=1, first_name="Bot", bot=True, bot_forum_sidebar=bot_forum_sidebar)
+
+    parsed = await types.User._parse(None, user)
+
+    assert parsed is not None
+    assert parsed.has_topics_sidebar is bot_forum_sidebar

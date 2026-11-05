@@ -48,6 +48,7 @@ from .get_owned_bots import GetOwnedBots
 from .refund_star_payment import RefundStarPayment
 from .replace_managed_bot_token import ReplaceManagedBotToken
 from .request_callback_answer import RequestCallbackAnswer
+from .request_widget_query_answer import RequestWidgetQueryAnswer
 from .send_chat_join_request_web_app import SendChatJoinRequestWebApp
 from .send_game import SendGame
 from .send_inline_bot_result import SendInlineBotResult
@@ -75,6 +76,7 @@ class Bots(
     GetOwnedBots,
     RefundStarPayment,
     RequestCallbackAnswer,
+    RequestWidgetQueryAnswer,
     SendChatJoinRequestWebApp,
     SendInlineBotResult,
     SendInvoice,

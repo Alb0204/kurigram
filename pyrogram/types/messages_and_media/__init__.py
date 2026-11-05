@@ -226,6 +226,7 @@ from .voice import Voice
 from .web_app_data import WebAppData
 from .web_page import WebPage
 from .widget import Widget
+from .widget_public_data import WidgetPublicData
 from .write_access_allowed import WriteAccessAllowed
 from .ton_connect_request_state import (
     TonConnectRequestState,
@@ -447,5 +448,6 @@ __all__ = [
     "WebAppData",
     "WebPage",
     "Widget",
+    "WidgetPublicData",
     "WriteAccessAllowed",
 ]

@@ -321,6 +321,7 @@ def pyrogram_api():
             mark_checklist_tasks_as_done
             open_web_app
             get_media_group
+            get_widget_public_data
             get_chat_history
             get_chat_history_count
             read_mentions
@@ -617,6 +618,7 @@ def pyrogram_api():
             answer_guest_query
             answer_inline_query
             request_callback_answer
+            request_widget_query_answer
             send_game
             set_game_score
             get_game_high_scores
@@ -1003,6 +1005,7 @@ def pyrogram_api():
             PollOption
             Dice
             Widget
+            WidgetPublicData
             Reaction
             RestrictionReason
             RichBlock

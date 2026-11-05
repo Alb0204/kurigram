@@ -47,6 +47,7 @@ from .stop_handler import StopHandler
 from .stopped_message_generation_handler import StoppedMessageGenerationHandler
 from .story_handler import StoryHandler
 from .user_status_handler import UserStatusHandler
+from .widget_query_handler import WidgetQueryHandler
 
 __all__ = [
     "BusinessConnectionHandler",
@@ -80,4 +81,5 @@ __all__ = [
     "StoppedMessageGenerationHandler",
     "StoryHandler",
     "UserStatusHandler",
+    "WidgetQueryHandler",
 ]

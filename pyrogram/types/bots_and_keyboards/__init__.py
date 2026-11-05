@@ -65,6 +65,7 @@ from .shipping_query import ShippingQuery
 from .switch_inline_query_chosen_chat import SwitchInlineQueryChosenChat
 from .users_shared import UsersShared
 from .web_app_info import WebAppInfo
+from .widget_query import WidgetQuery
 
 __all__ = [
     "BotAccessSettings",
@@ -116,4 +117,5 @@ __all__ = [
     "SwitchInlineQueryChosenChat",
     "UsersShared",
     "WebAppInfo",
+    "WidgetQuery",
 ]

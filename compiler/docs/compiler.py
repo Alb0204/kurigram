@@ -608,6 +608,7 @@ def pyrogram_api():
             set_managed_bot_access_settings
             send_invoice
             answer_callback_query
+            answer_widget_query
             answer_chat_join_request_query
             send_chat_join_request_web_app
             answer_guest_query
@@ -798,6 +799,7 @@ def pyrogram_api():
             on_purchased_paid_media
             on_shipping_query
             on_user_status
+            on_widget_query
             on_start
             on_stop
             on_connect
@@ -1216,6 +1218,7 @@ def pyrogram_api():
             ShippingAddress
             ShippingQuery
             SwitchInlineQueryChosenChat
+            WidgetQuery
             MessageReactionUpdated
             MessageReactionCountUpdated
             ChatBoostUpdated
@@ -1509,6 +1512,10 @@ def pyrogram_api():
         "shipping_query": """
         ShippingQuery
             ShippingQuery.answer
+        """,
+        "widget_query": """
+        WidgetQuery
+            WidgetQuery.answer
         """,
         "chat_join_request": """
         ChatJoinRequest

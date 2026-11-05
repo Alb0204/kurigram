@@ -54,6 +54,7 @@ from pyrogram.handlers import (
     StoppedMessageGenerationHandler,
     StoryHandler,
     UserStatusHandler,
+    WidgetQueryHandler,
 )
 from pyrogram.raw.types import (
     UpdateBotBusinessConnect,
@@ -71,6 +72,8 @@ from pyrogram.raw.types import (
     UpdateBotPrecheckoutQuery,
     UpdateBotPurchasedPaidMedia,
     UpdateBotShippingQuery,
+    UpdateBotWidgetCopyQuery,
+    UpdateBotWidgetQuery,
     UpdateBusinessBotCallbackQuery,
     UpdateChannelParticipant,
     UpdateChannelUserTyping,
@@ -84,6 +87,7 @@ from pyrogram.raw.types import (
     UpdateEditMessage,
     UpdateEphemeralBotCallbackQuery,
     UpdateInlineBotCallbackQuery,
+    UpdateInlineBotWidgetQuery,
     UpdateManagedBot,
     UpdateMessagePoll,
     UpdateMessagePollVote,
@@ -136,6 +140,11 @@ class Dispatcher:
     EDITED_BUSINESS_MESSAGE_UPDATES = (UpdateBotEditBusinessMessage,)
     DELETED_BUSINESS_MESSAGES_UPDATES = (UpdateBotDeleteBusinessMessage,)
     MANAGED_BOT_UPDATES = (UpdateManagedBot,)
+    WIDGET_QUERY_UPDATES = (
+        UpdateBotWidgetQuery,
+        UpdateInlineBotWidgetQuery,
+        UpdateBotWidgetCopyQuery,
+    )
     GUEST_MESSAGE_UPDATES = (UpdateBotGuestChatQuery,)
     USER_TYPING_UPDATES = (UpdateUserTyping, UpdateChatUserTyping, UpdateChannelUserTyping)
 
@@ -307,6 +316,12 @@ class Dispatcher:
                 ManagedBotUpdatedHandler,
             )
 
+        async def widget_query_parser(update, users, chats):
+            return (
+                await pyrogram.types.WidgetQuery._parse(self.client, update, users, chats),
+                WidgetQueryHandler,
+            )
+
         async def guest_message_parser(update, users, chats):
             # Guest messages are parsed the same way as new messages, but the handler is different
             # Pre-parse referenced messages so they get cached before the main message
@@ -356,6 +371,7 @@ class Dispatcher:
             Dispatcher.EDITED_BUSINESS_MESSAGE_UPDATES: edited_business_message_parser,
             Dispatcher.DELETED_BUSINESS_MESSAGES_UPDATES: deleted_business_messages_parser,
             Dispatcher.MANAGED_BOT_UPDATES: managed_bot_parser,
+            Dispatcher.WIDGET_QUERY_UPDATES: widget_query_parser,
             Dispatcher.GUEST_MESSAGE_UPDATES: guest_message_parser,
             Dispatcher.USER_TYPING_UPDATES: user_typing_parser,
         }

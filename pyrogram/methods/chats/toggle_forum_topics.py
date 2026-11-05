@@ -28,6 +28,7 @@ class ToggleForumTopics:
         chat_id: int | str,
         is_forum: bool = False,
         has_forum_tabs: bool = False,
+        has_forum_sidebar: bool = False,
     ) -> bool:
         """Enable or disable forum functionality in a supergroup.
 
@@ -46,6 +47,10 @@ class ToggleForumTopics:
                 Whether to enable or disable tabs in the forum.
                 Defaults to False.
 
+            has_forum_sidebar (``bool``, *optional*):
+                Whether to show the forum topics in a sidebar.
+                Defaults to False.
+
         Returns:
             ``bool``: True on success. False otherwise.
 
@@ -61,7 +66,10 @@ class ToggleForumTopics:
         try:
             r = await self.invoke(
                 raw.functions.channels.ToggleForum(
-                    channel=await self.resolve_peer(chat_id), enabled=is_forum, tabs=has_forum_tabs
+                    channel=await self.resolve_peer(chat_id),
+                    enabled=is_forum,
+                    tabs=has_forum_tabs,
+                    sidebar=has_forum_sidebar,
                 )
             )
 

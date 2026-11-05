@@ -601,6 +601,12 @@
       "notes": "Upstream branch with no PR (one commit, 976cfd50, 2026-09-15, 76 behind main). Review as if it were a PR.",
       "reviewed_head_sha": "976cfd50",
       "reason": "No PR upstream and 76 commits behind. Its main_api.tl:NNN citations fail the #537 guard, it names its sentinel `object` where upstream now uses MISSING, and it changes behaviour for callers already passing reply_markup=None (that would now remove the keyboard). The claim that an omitted field keeps the keyboard is server behaviour no offline test shows. Revisit if upstream opens a PR."
+    },
+    "feat/layer-233": {
+      "status": "fork-only",
+      "notes": "API layer 233 ahead of upstream (still on 232 at 77212d04): schema taken verbatim from tdesktop `dev`, then high-level support for widget messages, forum sidebars and audio-file transcription, one commit per concern.",
+      "reviewed_head_sha": null,
+      "reason": null
     }
   },
   "decisions": []

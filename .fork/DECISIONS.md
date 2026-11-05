@@ -2,6 +2,9 @@
 
 One dated line per non-obvious call, newest first. Status alone lives in `ledger.json`.
 
+- 2026-11-05: Took layer 233 ahead of upstream, on request, even though PLAN.md §0 says layer bumps are not where the fork gets ahead. The schema is tdesktop's `api.tl` verbatim. Upstream's own bump will be the same file, so the rebase conflict on it is resolved by taking theirs.
+- 2026-11-05: For widgets, followed tdesktop's layer 233 over `TelegramMessenger/widget-sandbox` `docs/tgw-format.md` wherever the two differ. The doc's TL has no constructor IDs and declares `fwd_allow_queries`, which tdesktop does not have; that shifts every later flag bit. It also types `public_data`, `chat_data` and `result` as `bytes` where tdesktop has `string`, and it lacks `query_type`, `wallet_card`, `public_data_hash`, `invert_media` and the inline `message`/`entities`. The doc is used only for semantics: the size limits, the zlib payload and the error IDs.
+- 2026-11-05: Widget method and type names follow the doc's Bot API 10.4 mapping (`send_widget`, `Widget`, `edit_shared_widget_data`). That mapping comes from a beta endpoint, and core.telegram.org still says 10.3, so the names are tentative and the Bot API parity baseline stays on 10.3.
 - 2026-11-05: Second sync onto `upstream/main` at `77212d04`, tagged `fork-sync/2026-11-05` before the rebase. Upstream merged #525 and #557, and both fork commits dropped out as already applied, so both are `superseded`. Upstream closed #160 as not planned; it stays `pending` here until it has a reproduction.
 
 - 2026-10-29: First sync onto `upstream/main` at `7b81e497`, tagged `fork-sync/2026-10-29` before the rebase. Upstream merged #553 and #558; both are `superseded`. #553's lock bump dropped out as already applied, and #558 shrank to the fork's own test, reworded as a Fork-only commit because the option itself now comes from upstream.

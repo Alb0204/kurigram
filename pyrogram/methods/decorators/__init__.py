@@ -46,6 +46,7 @@ from .on_stop import OnStop
 from .on_stopped_message_generation import OnStoppedMessageGeneration
 from .on_story import OnStory
 from .on_user_status import OnUserStatus
+from .on_widget_query import OnWidgetQuery
 
 
 class Decorators(
@@ -79,5 +80,6 @@ class Decorators(
     OnStoppedMessageGeneration,
     OnStory,
     OnUserStatus,
+    OnWidgetQuery,
 ):
     pass

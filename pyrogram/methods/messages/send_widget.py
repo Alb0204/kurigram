@@ -76,7 +76,8 @@ class SendWidget:
                 Defaults to 0.
 
             allow_queries (``bool``, *optional*):
-                Pass True to let the widget send queries to the bot.
+                Pass True to let the widget send queries to the bot, which receives them as
+                :obj:`~pyrogram.types.WidgetQuery` updates.
 
             is_shared (``bool``, *optional*):
                 Pass True to make the widget a shared one: every message and forward showing it

@@ -48,6 +48,7 @@ from pyrogram.types import (
     Story,
     Update,
     User,
+    WidgetQuery,
 )
 
 if TYPE_CHECKING:
@@ -146,6 +147,7 @@ _WITH_A_SENDER: Final[tuple[type[Update], ...]] = (
     PurchasedPaidMedia,
     ShippingQuery,
     Story,
+    WidgetQuery,
 )
 
 _WITH_A_CHAT: Final[tuple[type[Update], ...]] = (
@@ -158,6 +160,7 @@ _WITH_A_CHAT: Final[tuple[type[Update], ...]] = (
     MessageReactionCountUpdated,
     MessageReactionUpdated,
     Story,
+    WidgetQuery,
 )
 
 _WITH_A_SENDER_CHAT: Final[tuple[type[Update], ...]] = (Message, Story)

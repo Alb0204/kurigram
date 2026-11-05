@@ -78,6 +78,7 @@ from .bots_and_keyboards import (
     SwitchInlineQueryChosenChat,
     UsersShared,
     WebAppInfo,
+    WidgetQuery,
 )
 from .inline_mode import (
     ChosenInlineResult,
@@ -1053,6 +1054,7 @@ __all__ = [
     "Voice",
     "WebAppData",
     "WebAppInfo",
+    "WidgetQuery",
     "WebPage",
     "Widget",
     "WriteAccessAllowed",

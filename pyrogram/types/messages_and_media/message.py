@@ -232,6 +232,9 @@ class Message(Object, Update):
         checklist (:obj:`~pyrogram.types.Checklist`, *optional*):
             The message is a checklist message.
 
+        widget (:obj:`~pyrogram.types.Widget`, *optional*):
+            Message is a widget, information about the widget.
+
         show_caption_above_media (``bool``, *optional*):
             If True, caption must be shown above the message media.
 
@@ -731,6 +734,7 @@ class Message(Object, Update):
         media: enums.MessageMediaType | None = None,
         paid_media: types.PaidMediaInfo | None = None,
         checklist: types.Checklist | None = None,
+        widget: types.Widget | None = None,
         edit_date: datetime | None = None,
         edit_hidden: bool | None = None,
         media_group_id: int | None = None,
@@ -914,6 +918,7 @@ class Message(Object, Update):
         self.media = media
         self.paid_media = paid_media
         self.checklist = checklist
+        self.widget = widget
         self.edit_date = edit_date
         self.edit_hidden = edit_hidden
         self.media_group_id = media_group_id
@@ -1703,6 +1708,7 @@ class Message(Object, Update):
         dice = None
         paid_media = None
         checklist = None
+        widget = None
 
         media = message.media
         media_type = None
@@ -1841,6 +1847,9 @@ class Message(Object, Update):
             elif isinstance(media, raw.types.MessageMediaToDo):
                 media_type = enums.MessageMediaType.CHECKLIST
                 checklist = await types.Checklist._parse(client, media, users, chats)
+            elif isinstance(media, raw.types.MessageMediaWidget):
+                widget = types.Widget._parse(client, media)
+                media_type = enums.MessageMediaType.WIDGET
             else:
                 media_type = enums.MessageMediaType.UNSUPPORTED
                 media = None
@@ -1903,6 +1912,7 @@ class Message(Object, Update):
             media=media_type,
             paid_media=paid_media,
             checklist=checklist,
+            widget=widget,
             show_caption_above_media=message.invert_media,
             edit_date=utils.timestamp_to_datetime(message.edit_date),
             edit_hidden=message.edit_hide,
@@ -2124,6 +2134,7 @@ class Message(Object, Update):
         dice = None
         paid_media = None
         checklist = None
+        widget = None
 
         media = message.media
         media_type = None
@@ -2262,6 +2273,9 @@ class Message(Object, Update):
             elif isinstance(media, raw.types.MessageMediaToDo):
                 media_type = enums.MessageMediaType.CHECKLIST
                 checklist = await types.Checklist._parse(client, media, users, chats)
+            elif isinstance(media, raw.types.MessageMediaWidget):
+                widget = types.Widget._parse(client, media)
+                media_type = enums.MessageMediaType.WIDGET
             else:
                 media_type = enums.MessageMediaType.UNSUPPORTED
                 media = None
@@ -2309,6 +2323,7 @@ class Message(Object, Update):
             media=media_type,
             paid_media=paid_media,
             checklist=checklist,
+            widget=widget,
             photo=photo,
             live_photo=live_photo,
             location=location,

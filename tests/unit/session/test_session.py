@@ -29,8 +29,16 @@ import pytest
 import pyrogram
 from pyrogram import raw
 from pyrogram.crypto import aes, mtproto
-from pyrogram.raw.core import FutureSalt, FutureSalts, Long, Message, MsgContainer, TLObject
-from pyrogram.session.session import Result, Session, SessionState
+from pyrogram.raw.core import (
+    FutureSalt,
+    FutureSalts,
+    Int,
+    Long,
+    Message,
+    MsgContainer,
+    TLObject,
+)
+from pyrogram.session.session import AuthKeyNotFound, Result, Session, SessionState
 
 if TYPE_CHECKING:
     from concurrent.futures import Executor
@@ -605,3 +613,121 @@ async def test_invoke_on_a_session_that_is_not_running_raises(
 
     # `Session.__str__` carries the state, so this pins the message on both parameters.
     assert str(session) in message
+
+
+# The 4-byte packet a server sends for transport error -404, "auth key not found":
+#  https://core.telegram.org/mtproto/mtproto-transports#transport-errors
+_AUTH_KEY_NOT_FOUND_PACKET: Final[bytes] = Int(-404)
+
+
+def _media_session_receiving_404(monkeypatch: pytest.MonkeyPatch) -> tuple[Session, list[str]]:
+    """A started media session about to read a -404, recording the restarts and stops it asks for."""
+    monkeypatch.setattr(Session, "RETRY_DELAY", 0)
+
+    session = _started_session()
+    session.is_media = True
+    session.client.media_sessions[_DC_ID] = session
+    session.connection.packets = [_AUTH_KEY_NOT_FOUND_PACKET]
+
+    calls: list[str] = []
+
+    async def restart() -> None:
+        calls.append("restart")
+
+    async def stop() -> None:
+        calls.append("stop")
+
+    session.restart = restart
+    session.stop = stop
+
+    return session, calls
+
+
+async def _receive(session: Session) -> asyncio.Task:
+    """Run the receive worker until it gives the packets up, and let what it scheduled run."""
+    task = asyncio.create_task(session.recv_worker())
+
+    await asyncio.wait([task])
+    for _ in range(3):
+        await asyncio.sleep(0)
+
+    return task
+
+
+async def test_a_media_session_reconnects_on_auth_key_not_found(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    # https://github.com/kurigram-org/kurigram/issues/565: the worker raised `AuthKeyNotFound`
+    #  and died, and every request on the session then waited out `WAIT_TIMEOUT`.
+    session, calls = _media_session_receiving_404(monkeypatch)
+
+    task = await _receive(session)
+
+    assert task.exception() is None
+    assert calls == ["restart"]
+    assert session.client.media_sessions[_DC_ID] is session
+
+
+async def test_a_media_session_gives_up_after_too_many_auth_key_not_found(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    session, calls = _media_session_receiving_404(monkeypatch)
+    session.auth_key_not_found_count = Session.MAX_AUTH_KEY_NOT_FOUND
+
+    waiting = Result()
+    session.results[1] = waiting
+
+    task = await _receive(session)
+
+    assert isinstance(task.exception(), AuthKeyNotFound)
+    assert isinstance(waiting.exception, AuthKeyNotFound)
+    assert calls == ["stop"]
+    # So the next `Client.get_session(is_media=True)` builds a new one.
+    assert _DC_ID not in session.client.media_sessions
+
+
+async def test_giving_up_off_the_home_dc_also_drops_the_session_whose_key_it_borrowed(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    session, _ = _media_session_receiving_404(monkeypatch)
+    session.auth_key_not_found_count = Session.MAX_AUTH_KEY_NOT_FOUND
+
+    dc_session = _started_session()
+    stopped: list[bool] = []
+
+    async def stop() -> None:
+        stopped.append(True)
+
+    dc_session.stop = stop
+    session.client.sessions[_DC_ID] = dc_session
+
+    await _receive(session)
+
+    assert _DC_ID not in session.client.sessions
+    assert stopped == [True]
+
+
+async def test_the_main_session_fails_its_waiters_on_auth_key_not_found() -> None:
+    session = _started_session()
+    session.connection.packets = [_AUTH_KEY_NOT_FOUND_PACKET]
+
+    waiting = Result()
+    session.results[1] = waiting
+
+    task = await _receive(session)
+
+    assert isinstance(task.exception(), AuthKeyNotFound)
+    # At once, not after `WAIT_TIMEOUT`.
+    assert waiting.event.is_set()
+    assert isinstance(waiting.exception, AuthKeyNotFound)
+
+
+async def test_a_packet_that_decrypts_resets_the_auth_key_not_found_count() -> None:
+    session = _started_session()
+    session.auth_key_not_found_count = Session.MAX_AUTH_KEY_NOT_FOUND
+
+    await session.handle_packet(
+        await _server_packet(session=session, body=raw.types.Pong(msg_id=0, ping_id=0))
+    )
+
+    assert session.auth_key_not_found_count == 0

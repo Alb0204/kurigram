@@ -102,6 +102,11 @@ class Session:
     CRYPTO_EXECUTOR_WORKERS = 1
     MAX_CONSECUTIVE_IGNORED = 30
 
+    # How many times in a row a media session reconnects on a `-404` transport error before it
+    #  gives up. A media DC can answer `-404` for a key it has not been told about yet, which a
+    #  reconnect a moment later gets past; one that keeps answering it never will.
+    MAX_AUTH_KEY_NOT_FOUND = 3
+
     # TDLib asks for a new pool when the pool is empty or the current salt has under a
     #  minute left, and never more often than once a minute. Both thresholds and the
     #  count are TDLib's:
@@ -151,6 +156,10 @@ class Session:
         self._future_salts_requested_at: float = 0.0
 
         self.ignore_count = 0
+
+        # `-404` transport errors since the last packet that decrypted, see
+        #  `MAX_AUTH_KEY_NOT_FOUND`.
+        self.auth_key_not_found_count = 0
 
         self.pending_acks: set[int] = set()
 
@@ -406,6 +415,8 @@ class Session:
             asyncio.create_task(self.restart())
             return
 
+        self.auth_key_not_found_count = 0
+
         messages = data.body.messages if isinstance(data.body, MsgContainer) else [data]
 
         log.debug("Received: %s", data)
@@ -598,10 +609,22 @@ class Session:
                     error_msg = "unknown error"
 
                     if error_code == 404:
-                        raise AuthKeyNotFound(
+                        if self._recover_from_auth_key_not_found():
+                            break
+
+                        error = AuthKeyNotFound(
                             "Auth key not found in the system. Try again or delete your session file "
                             "and log in again with your phone number or bot token."
                         )
+
+                        # Failed here rather than left to time out, since nothing will
+                        #  answer them on this connection.
+                        self._fail_waiters(error)
+
+                        if self.is_media:
+                            self._give_up()
+
+                        raise error
 
                     try:
                         if error_code == 429:
@@ -627,6 +650,57 @@ class Session:
             self._create_tracked_task(self.handle_packet(packet))
 
         log.info("NetworkTask stopped")
+
+    def _recover_from_auth_key_not_found(self) -> bool:
+        """Reconnect a media session after a `-404`, unless it has done so too often already.
+
+        https://github.com/kurigram-org/kurigram/issues/565. Only a media session does: it borrows
+        the key of its DC's main session, which a media DC may not have been told about yet. The
+        main session's own key being unknown is not something a reconnect fixes.
+        """
+        self.auth_key_not_found_count += 1
+
+        if not self.is_media or self.auth_key_not_found_count > self.MAX_AUTH_KEY_NOT_FOUND:
+            return False
+
+        log.warning(
+            "Media session got transport error 404 (auth key not found), reconnecting (%s of %s)",
+            self.auth_key_not_found_count,
+            self.MAX_AUTH_KEY_NOT_FOUND,
+        )
+
+        asyncio.create_task(self._restart_later(self.RETRY_DELAY * self.auth_key_not_found_count))
+
+        return True
+
+    async def _restart_later(self, delay: float) -> None:
+        await asyncio.sleep(delay)
+        await self.restart()
+
+    def _fail_waiters(self, error: Exception) -> None:
+        for result in self.results.values():
+            result.exception = error
+            result.event.set()
+
+        self.results.clear()
+
+    def _give_up(self) -> None:
+        """Stop for good and let `Client.get_session()` build a new media session next time."""
+        media_sessions = self.client.media_sessions
+
+        if media_sessions.get(self.dc_id) is self:
+            del media_sessions[self.dc_id]
+
+        # Off the home DC the key comes from `Client.sessions`, and a new media session would
+        #  borrow the same rejected key, so that session goes too: `get_session()` then creates
+        #  and exports a fresh key. The home DC's key is the account's own, never evicted here.
+        dc_session = self.client.sessions.get(self.dc_id)
+
+        if dc_session is not None and dc_session.auth_key == self.auth_key:
+            del self.client.sessions[self.dc_id]
+            asyncio.create_task(dc_session.stop())
+
+        asyncio.create_task(self.stop())
 
     async def send(self, data: TLObject, wait_response: bool = True, timeout: float = WAIT_TIMEOUT):
         message = await self.msg_factory.create(data)

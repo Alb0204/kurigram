@@ -23,6 +23,7 @@ from typing import TYPE_CHECKING
 
 import pyrogram
 from pyrogram import enums, raw, types, utils
+from pyrogram.file_id import FileType
 
 if TYPE_CHECKING:
     from datetime import datetime, timedelta
@@ -246,6 +247,16 @@ class CopyMediaGroup:
                         else message.has_media_spoiler
                     )
                 ),
+                # A bare document loses the video's cover and start timestamp:
+                #  https://github.com/kurigram-org/kurigram/issues/563
+                video_cover=utils.get_input_media_from_file_id(
+                    message.video.video_cover.file_id, FileType.PHOTO
+                ).id
+                if message.video and message.video.video_cover
+                else None,
+                video_start_timestamp=message.video.video_start_timestamp
+                if message.video
+                else None,
             )
             multi_media.append(
                 raw.types.InputSingleMedia(

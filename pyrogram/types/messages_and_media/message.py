@@ -22,9 +22,8 @@ from __future__ import annotations as _annotations
 
 import contextlib
 import logging
-from functools import partial
 from itertools import groupby
-from typing import TYPE_CHECKING, BinaryIO, Literal, SupportsIndex, overload
+from typing import TYPE_CHECKING, Any, BinaryIO, Literal, SupportsIndex, overload
 
 import pyrogram
 from pyrogram import enums, raw, types, utils
@@ -9191,6 +9190,8 @@ class Message(Object, Update):
         reply_to_message_id: int | None = None,
         quote_text: str | None = None,
         quote_entities: list[types.MessageEntity] | None = None,
+        video_cover: PathType | BinaryIO | bool | None = None,
+        video_start_timestamp: int | None = None,
     ) -> types.Message | None:
         """Shortcut for method :obj:`~pyrogram.Client.copy_message` will automatically fill method attributes:
 
@@ -9277,6 +9278,17 @@ class Message(Object, Update):
                 This parameter is deprecated and should not be used.
                 Use `reply_parameters` instead.
 
+            video_cover (``str`` | ``os.PathLike`` | ``BinaryIO`` | ``bool``, *optional*):
+                New cover for a video: a photo file id, an HTTP URL, a local path or a file object.
+                If not specified, or True, the original cover is kept.
+                Pass False to send the video without a cover.
+                Ignored for anything that is not a video.
+
+            video_start_timestamp (``int``, *optional*):
+                New start timestamp for a video, in seconds.
+                If not specified, the original one is kept.
+                Ignored for anything that is not a video.
+
         Returns:
             :obj:`~pyrogram.types.Message` | ``None``: On success, the copied message is returned, otherwise, in case
             no message was sent, None is returned.
@@ -9320,27 +9332,26 @@ class Message(Object, Update):
                 reply_markup=self.reply_markup if reply_markup is object else reply_markup,
             )
         elif self.media:
-            send_media = partial(
-                self._client.send_cached_media,
-                chat_id=chat_id,
-                disable_notification=disable_notification,
-                message_thread_id=message_thread_id,
-                reply_parameters=reply_parameters,
-                reply_to_message_id=reply_to_message_id,
-                reply_to_chat_id=reply_to_chat_id,
-                quote_text=quote_text,
-                quote_entities=quote_entities,
-                schedule_date=schedule_date,
-                protect_content=protect_content,
-                has_spoiler=self.has_media_spoiler if has_spoiler is None else has_spoiler,
-                show_caption_above_media=self.show_caption_above_media
+            common: dict[str, Any] = {
+                "chat_id": chat_id,
+                "disable_notification": disable_notification,
+                "message_thread_id": message_thread_id,
+                "reply_parameters": reply_parameters,
+                "reply_to_message_id": reply_to_message_id,
+                "reply_to_chat_id": reply_to_chat_id,
+                "quote_text": quote_text,
+                "quote_entities": quote_entities,
+                "schedule_date": schedule_date,
+                "protect_content": protect_content,
+                "has_spoiler": self.has_media_spoiler if has_spoiler is None else has_spoiler,
+                "show_caption_above_media": self.show_caption_above_media
                 if show_caption_above_media is None
                 else show_caption_above_media,
-                business_connection_id=business_connection_id,
-                allow_paid_broadcast=allow_paid_broadcast,
-                paid_message_star_count=paid_message_star_count,
-                reply_markup=self.reply_markup if reply_markup is object else reply_markup,
-            )
+                "business_connection_id": business_connection_id,
+                "allow_paid_broadcast": allow_paid_broadcast,
+                "paid_message_star_count": paid_message_star_count,
+                "reply_markup": self.reply_markup if reply_markup is object else reply_markup,
+            }
 
             if self.photo:
                 file_id = self.photo.file_id
@@ -9444,12 +9455,32 @@ class Message(Object, Update):
                 caption = self.caption or ""
                 caption_entities = self.caption_entities
 
-            return await send_media(
+            if self.video:
+                # `send_cached_media` sends the bare document, which drops the cover and the
+                #  start timestamp: https://github.com/kurigram-org/kurigram/issues/563
+                if video_cover is None or video_cover is True:
+                    video_cover = self.video.video_cover.file_id if self.video.video_cover else None
+                elif video_cover is False:
+                    video_cover = None
+
+                return await self._client.send_video(
+                    video=file_id,
+                    caption=caption,
+                    parse_mode=parse_mode,
+                    caption_entities=caption_entities,
+                    video_cover=video_cover,
+                    video_start_timestamp=self.video.video_start_timestamp
+                    if video_start_timestamp is None
+                    else video_start_timestamp,
+                    **common,
+                )
+
+            return await self._client.send_cached_media(
                 file_id=file_id,
                 caption=caption,
                 parse_mode=parse_mode,
                 caption_entities=caption_entities,
-                message_thread_id=message_thread_id,
+                **common,
             )
         else:
             raise ValueError("Can't copy this message")

@@ -19,10 +19,12 @@
 from __future__ import annotations as _annotations
 
 import logging
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, BinaryIO
 
 if TYPE_CHECKING:
     from datetime import datetime, timedelta
+
+    from pyrogram._typing import PathType
 
     import pyrogram
     from pyrogram import enums, types
@@ -64,6 +66,8 @@ class CopyMessage:
         reply_to_message_id: int | None = None,
         quote_text: str | None = None,
         quote_entities: list[types.MessageEntity] | None = None,
+        video_cover: PathType | BinaryIO | bool | None = None,
+        video_start_timestamp: int | None = None,
     ) -> types.Message | None:
         """Copy messages of any kind.
 
@@ -160,6 +164,17 @@ class CopyMessage:
                 This parameter is deprecated and should not be used.
                 Use `reply_parameters` instead.
 
+            video_cover (``str`` | ``os.PathLike`` | ``BinaryIO`` | ``bool``, *optional*):
+                New cover for a video: a photo file id, an HTTP URL, a local path or a file object.
+                If not specified, or True, the original cover is kept.
+                Pass False to send the video without a cover.
+                Ignored for anything that is not a video.
+
+            video_start_timestamp (``int``, *optional*):
+                New start timestamp for a video, in seconds.
+                If not specified, the original one is kept.
+                Ignored for anything that is not a video.
+
         Returns:
             :obj:`~pyrogram.types.Message` | ``None``: On success, the copied message is returned,
             otherwise, in case no message was sent, None is returned.
@@ -169,6 +184,9 @@ class CopyMessage:
 
                 # Copy a message
                 await app.copy_message(to_chat, from_chat, 123)
+
+                # Copy a video with a new cover
+                await app.copy_message(to_chat, from_chat, 123, video_cover="cover.jpg")
 
         """
         message: types.Message = await self.get_messages(
@@ -195,4 +213,6 @@ class CopyMessage:
             reply_to_message_id=reply_to_message_id,
             quote_text=quote_text,
             quote_entities=quote_entities,
+            video_cover=video_cover,
+            video_start_timestamp=video_start_timestamp,
         )

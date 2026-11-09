@@ -218,7 +218,7 @@ gets worse.
    shouldn't get a high-level wrapper (`help.*` internals, `auth.*` handled by `Client`, `test.*`),
    so the number tracks real gaps only.
 3. **Bot API parity.** Scrape the `<h4>` method and type names from
-   `https://core.telegram.org/bots/api`, recording the version (currently 10.3). Map methods to
+   `https://core.telegram.org/bots/api`, recording the version (currently 10.4). Map methods to
    `snake_case` and types to class names. A `bot_api_aliases.toml` records three kinds of entry:
    - renames (`getMyCommands = "get_bot_commands"`);
    - not-applicable entries (`getUpdates`, `setWebhook`, `deleteWebhook`, `getWebhookInfo`,

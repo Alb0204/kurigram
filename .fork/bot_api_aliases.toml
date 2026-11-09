@@ -26,6 +26,9 @@ getMyDefaultAdministratorRights = "get_bot_default_privileges"
 giftPremiumSubscription = "gift_premium_with_stars"
 deleteMessage = "delete_messages"
 getMyStarBalance = "get_stars_balance"
+getUniqueGift = "get_upgraded_gift"
+deleteBusinessAccountGift = "delete_gift"
+setMyProfilePhoto = "set_profile_photo"
 
 [methods.not_applicable]
 # Bot API HTTP transport. An MTProto client receives updates over its own connection.
@@ -39,6 +42,7 @@ close = "closes a Bot API server instance"
 getChatAdministrators = "get_chat_members(filter=ChatMembersFilter.ADMINISTRATORS)"
 getUserGifts = "get_chat_gifts, which takes a user as the chat"
 getFile = "download_media, which resolves and downloads in one call"
+removeMyProfilePhoto = "delete_profile_photos, given the current photo's id"
 
 [types.renamed]
 Birthdate = "Birthday"
@@ -47,6 +51,7 @@ BusinessOpeningHours = "BusinessWorkingHours"
 BusinessOpeningHoursInterval = "BusinessWeeklyOpen"
 InlineQueryResultGif = "InlineQueryResultAnimation"
 InlineQueryResultCachedGif = "InlineQueryResultCachedAnimation"
+PaidMessagesWaived = "UnpaidMessagesAllowedByLink"
 
 [types.not_applicable]
 Update = "updates are dispatched to handlers, not returned as one object"
@@ -68,3 +73,4 @@ ReactionTypeEmoji = "one `Reaction` with an emoji, a custom emoji id or `paid`"
 ReactionTypeCustomEmoji = "one `Reaction` with an emoji, a custom emoji id or `paid`"
 ReactionTypePaid = "one `Reaction` with an emoji, a custom emoji id or `paid`"
 ReactionCount = "`Reaction.count`"
+SharedWidgetQuery = "one `WidgetQuery`, with `is_from_copy` set for a forwarded shared widget"

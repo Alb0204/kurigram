@@ -3,8 +3,8 @@
 | Number | Now | Baseline |
 |--------|-----|----------|
 | `layers_behind` | 0 | 0 |
-| `raw_unwrapped` | 486 | 489 |
-| `bot_api_gaps` | 163 | 141 |
+| `raw_unwrapped` | 485 | 486 |
+| `bot_api_gaps` | 153 | 163 |
 
 ## Layer drift
 
@@ -14,7 +14,7 @@ Every combinator matches.
 
 ## Raw API coverage
 
-341 of 827 tracked raw functions are called by a high-level method; 486 are not. `coverage_ignore.toml` leaves out the ones that should never get a wrapper.
+342 of 827 tracked raw functions are called by a high-level method; 485 are not. `coverage_ignore.toml` leaves out the ones that should never get a wrapper.
 
 | Namespace | Unwrapped | Tracked |
 |-----------|-----------|---------|
@@ -22,9 +22,9 @@ Every combinator matches.
 | account | 95 | 128 |
 | phone | 42 | 43 |
 | payments | 40 | 76 |
-| bots | 23 | 40 |
 | channels | 23 | 58 |
 | wallet | 23 | 26 |
+| bots | 22 | 40 |
 | contacts | 18 | 30 |
 | stories | 17 | 33 |
 | help | 11 | 14 |
@@ -171,7 +171,7 @@ Every combinator matches.
 
 </details>
 
-<details><summary>bots (23)</summary>
+<details><summary>bots (22)</summary>
 
 - `bots.addPreviewMedia`
 - `bots.addUsername`
@@ -191,7 +191,6 @@ Every combinator matches.
 - `bots.reorderPreviewMedias`
 - `bots.requestWebViewButton`
 - `bots.sendCustomRequest`
-- `bots.setCustomVerification`
 - `bots.toggleUserEmojiStatusPermission`
 - `bots.toggleUsername`
 - `bots.updateStarRefProgram`
@@ -648,51 +647,13 @@ Every combinator matches.
 
 ## Bot API parity
 
-Bot API 10.4: 193 methods, 425 types. 37 methods and 126 types have no counterpart here.
+Bot API 10.4: 193 methods, 425 types. 29 methods and 124 types have no counterpart here.
 
-**New since Bot API 10.3:**
-
-- `answerWidgetQuery`
-- `deleteBusinessAccountGift`
-- `editMessageWidgetData`
-- `editSharedWidgetData`
-- `getChatShareThemeBackdrops`
-- `getUniqueGift`
-- `sendSharedWidget`
-- `sendWidget`
-- `AreaPosition`
-- `ChatShareTheme`
-- `ChatShareThemeBackdrop`
-- `ChatShareThemeBackdrops`
-- `ChatShareThemeEmoji`
-- `ChatShareThemeUniqueGift`
-- `EmojiType`
-- `EmojiTypeCustomEmoji`
-- `EmojiTypeEmoji`
-- `InputSharedWidgetMessageContent`
-- `InputWidgetMessageContent`
-- `PaidMessagesWaived`
-- `RichTextTonAddress`
-- `SharedWidgetQuery`
-- `TonNft`
-- `TonNftAttribute`
-- `TonWalletCard`
-- `TonWalletCardSticker`
-- `TonWalletTransfer`
-- `Widget`
-- `WidgetQuery`
-- `WidgetQueryType`
-- `WidgetQueryTypeData`
-- `WidgetQueryTypeSentTransaction`
-- `WidgetQueryTypeSignData`
-- `WidgetQueryWallet`
-
-<details><summary>Methods (37)</summary>
+<details><summary>Methods (29)</summary>
 
 - `banChatSenderChat`
 - `copyMessages`
 - `createChatSubscriptionInviteLink`
-- `deleteBusinessAccountGift`
 - `deleteChatStickerSet`
 - `deleteStory`
 - `editChatSubscriptionInviteLink`
@@ -701,15 +662,11 @@ Bot API 10.4: 193 methods, 425 types. 37 methods and 126 types have no counterpa
 - `getChatShareThemeBackdrops`
 - `getForumTopicIconStickers`
 - `getStarTransactions`
-- `getUniqueGift`
 - `getUserChatBoosts`
 - `getUserProfileAudios`
 - `postStory`
 - `readBusinessMessage`
 - `removeBusinessAccountProfilePhoto`
-- `removeChatVerification`
-- `removeMyProfilePhoto`
-- `removeUserVerification`
 - `repostStory`
 - `savePreparedInlineMessage`
 - `savePreparedKeyboardButton`
@@ -719,17 +676,14 @@ Bot API 10.4: 193 methods, 425 types. 37 methods and 126 types have no counterpa
 - `setBusinessAccountProfilePhoto`
 - `setBusinessAccountUsername`
 - `setChatStickerSet`
-- `setMyProfilePhoto`
 - `setPassportDataErrors`
 - `setUserEmojiStatus`
 - `stopMessageLiveLocation`
 - `unbanChatSenderChat`
-- `verifyChat`
-- `verifyUser`
 
 </details>
 
-<details><summary>Types (126)</summary>
+<details><summary>Types (124)</summary>
 
 - `AffiliateInfo`
 - `AreaPosition`
@@ -796,7 +750,6 @@ Bot API 10.4: 193 methods, 425 types. 37 methods and 126 types have no counterpa
 - `PaidMediaPurchased`
 - `PaidMediaVideo`
 - `PaidMessagePriceChanged`
-- `PaidMessagesWaived`
 - `PassportData`
 - `PassportElementError`
 - `PassportElementErrorDataField`
@@ -818,7 +771,6 @@ Bot API 10.4: 193 methods, 425 types. 37 methods and 126 types have no counterpa
 - `RevenueWithdrawalStatePending`
 - `RevenueWithdrawalStateSucceeded`
 - `SharedUser`
-- `SharedWidgetQuery`
 - `StarTransaction`
 - `StarTransactions`
 - `StoryArea`

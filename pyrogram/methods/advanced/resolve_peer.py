@@ -32,7 +32,9 @@ class ResolvePeer:
         self: pyrogram.Client,
         peer_id: int | str,
     ) -> raw.types.InputPeerUserFromMessage | raw.types.InputPeerChannelFromMessage | None:
-        for (_, message_id), parsed_message in self.message_cache._cache.items():
+        # Newest first: the cache keeps the most recently stored message last, and the server
+        #  accepts a `*FromMessage` peer only while it still knows the message.
+        for (_, message_id), parsed_message in reversed(self.message_cache._cache.items()):
             if not parsed_message:
                 continue
 

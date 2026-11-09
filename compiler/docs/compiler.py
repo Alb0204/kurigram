@@ -616,6 +616,10 @@ def pyrogram_api():
             send_invoice
             answer_callback_query
             answer_widget_query
+            verify_user
+            verify_chat
+            remove_user_verification
+            remove_chat_verification
             answer_chat_join_request_query
             send_chat_join_request_web_app
             answer_guest_query

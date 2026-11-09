@@ -46,6 +46,8 @@ from .get_managed_bot_access_settings import GetManagedBotAccessSettings
 from .get_managed_bot_token import GetManagedBotToken
 from .get_owned_bots import GetOwnedBots
 from .refund_star_payment import RefundStarPayment
+from .remove_chat_verification import RemoveChatVerification
+from .remove_user_verification import RemoveUserVerification
 from .replace_managed_bot_token import ReplaceManagedBotToken
 from .request_callback_answer import RequestCallbackAnswer
 from .request_widget_query_answer import RequestWidgetQueryAnswer
@@ -61,6 +63,8 @@ from .set_bot_name import SetBotName
 from .set_chat_menu_button import SetChatMenuButton
 from .set_game_score import SetGameScore
 from .set_managed_bot_access_settings import SetManagedBotAccessSettings
+from .verify_chat import VerifyChat
+from .verify_user import VerifyUser
 
 
 class Bots(
@@ -109,5 +113,9 @@ class Bots(
     CheckBotUsername,
     CreateBot,
     SetManagedBotAccessSettings,
+    VerifyUser,
+    VerifyChat,
+    RemoveUserVerification,
+    RemoveChatVerification,
 ):
     pass

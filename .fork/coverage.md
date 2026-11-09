@@ -3,8 +3,8 @@
 | Number | Now | Baseline |
 |--------|-----|----------|
 | `layers_behind` | 0 | 0 |
-| `raw_unwrapped` | 489 | 497 |
-| `bot_api_gaps` | 141 | 141 |
+| `raw_unwrapped` | 486 | 489 |
+| `bot_api_gaps` | 163 | 141 |
 
 ## Layer drift
 
@@ -14,16 +14,16 @@ Every combinator matches.
 
 ## Raw API coverage
 
-338 of 827 tracked raw functions are called by a high-level method; 489 are not. `coverage_ignore.toml` leaves out the ones that should never get a wrapper.
+341 of 827 tracked raw functions are called by a high-level method; 486 are not. `coverage_ignore.toml` leaves out the ones that should never get a wrapper.
 
 | Namespace | Unwrapped | Tracked |
 |-----------|-----------|---------|
 | messages | 140 | 269 |
-| account | 96 | 128 |
+| account | 95 | 128 |
 | phone | 42 | 43 |
 | payments | 40 | 76 |
-| bots | 24 | 40 |
-| channels | 24 | 58 |
+| bots | 23 | 40 |
+| channels | 23 | 58 |
 | wallet | 23 | 26 |
 | contacts | 18 | 30 |
 | stories | 17 | 33 |
@@ -44,7 +44,7 @@ Every combinator matches.
 | folders | 0 | 1 |
 | updates | 0 | 3 |
 
-<details><summary>account (96)</summary>
+<details><summary>account (95)</summary>
 
 - `account.acceptAuthorization`
 - `account.cancelPasswordEmail`
@@ -103,7 +103,6 @@ Every combinator matches.
 - `account.invalidateSignInCodes`
 - `account.registerDevice`
 - `account.registerPasskey`
-- `account.reorderUsernames`
 - `account.reportPeer`
 - `account.reportProfilePhoto`
 - `account.resendPasswordEmail`
@@ -172,7 +171,7 @@ Every combinator matches.
 
 </details>
 
-<details><summary>bots (24)</summary>
+<details><summary>bots (23)</summary>
 
 - `bots.addPreviewMedia`
 - `bots.addUsername`
@@ -190,7 +189,6 @@ Every combinator matches.
 - `bots.invokeWebViewCustomMethod`
 - `bots.removeUsername`
 - `bots.reorderPreviewMedias`
-- `bots.reorderUsernames`
 - `bots.requestWebViewButton`
 - `bots.sendCustomRequest`
 - `bots.setCustomVerification`
@@ -201,7 +199,7 @@ Every combinator matches.
 
 </details>
 
-<details><summary>channels (24)</summary>
+<details><summary>channels (23)</summary>
 
 - `channels.checkSearchPostsFlood`
 - `channels.convertToGigagroup`
@@ -212,7 +210,6 @@ Every combinator matches.
 - `channels.getLeftChannels`
 - `channels.getMessageAuthor`
 - `channels.readMessageContents`
-- `channels.reorderUsernames`
 - `channels.reportAntiSpamFalsePositive`
 - `channels.reportSpam`
 - `channels.restrictSponsoredMessages`
@@ -651,20 +648,60 @@ Every combinator matches.
 
 ## Bot API parity
 
-Bot API 10.3: 185 methods, 400 types. 34 methods and 107 types have no counterpart here.
+Bot API 10.4: 193 methods, 425 types. 37 methods and 126 types have no counterpart here.
 
-<details><summary>Methods (34)</summary>
+**New since Bot API 10.3:**
+
+- `answerWidgetQuery`
+- `deleteBusinessAccountGift`
+- `editMessageWidgetData`
+- `editSharedWidgetData`
+- `getChatShareThemeBackdrops`
+- `getUniqueGift`
+- `sendSharedWidget`
+- `sendWidget`
+- `AreaPosition`
+- `ChatShareTheme`
+- `ChatShareThemeBackdrop`
+- `ChatShareThemeBackdrops`
+- `ChatShareThemeEmoji`
+- `ChatShareThemeUniqueGift`
+- `EmojiType`
+- `EmojiTypeCustomEmoji`
+- `EmojiTypeEmoji`
+- `InputSharedWidgetMessageContent`
+- `InputWidgetMessageContent`
+- `PaidMessagesWaived`
+- `RichTextTonAddress`
+- `SharedWidgetQuery`
+- `TonNft`
+- `TonNftAttribute`
+- `TonWalletCard`
+- `TonWalletCardSticker`
+- `TonWalletTransfer`
+- `Widget`
+- `WidgetQuery`
+- `WidgetQueryType`
+- `WidgetQueryTypeData`
+- `WidgetQueryTypeSentTransaction`
+- `WidgetQueryTypeSignData`
+- `WidgetQueryWallet`
+
+<details><summary>Methods (37)</summary>
 
 - `banChatSenderChat`
 - `copyMessages`
 - `createChatSubscriptionInviteLink`
+- `deleteBusinessAccountGift`
 - `deleteChatStickerSet`
 - `deleteStory`
 - `editChatSubscriptionInviteLink`
 - `editMessageLiveLocation`
 - `editStory`
+- `getChatShareThemeBackdrops`
 - `getForumTopicIconStickers`
 - `getStarTransactions`
+- `getUniqueGift`
 - `getUserChatBoosts`
 - `getUserProfileAudios`
 - `postStory`
@@ -692,9 +729,10 @@ Bot API 10.3: 185 methods, 400 types. 34 methods and 107 types have no counterpa
 
 </details>
 
-<details><summary>Types (107)</summary>
+<details><summary>Types (126)</summary>
 
 - `AffiliateInfo`
+- `AreaPosition`
 - `BackgroundFill`
 - `BackgroundFillFreeformGradient`
 - `BackgroundFillGradient`
@@ -717,6 +755,14 @@ Bot API 10.3: 185 methods, 400 types. 34 methods and 107 types have no counterpa
 - `ChatBoostSourceGiveaway`
 - `ChatBoostSourcePremium`
 - `ChatLocation`
+- `ChatShareTheme`
+- `ChatShareThemeBackdrop`
+- `ChatShareThemeBackdrops`
+- `ChatShareThemeEmoji`
+- `ChatShareThemeUniqueGift`
+- `EmojiType`
+- `EmojiTypeCustomEmoji`
+- `EmojiTypeEmoji`
 - `EncryptedCredentials`
 - `EncryptedPassportElement`
 - `GiftBackground`
@@ -750,6 +796,7 @@ Bot API 10.3: 185 methods, 400 types. 34 methods and 107 types have no counterpa
 - `PaidMediaPurchased`
 - `PaidMediaVideo`
 - `PaidMessagePriceChanged`
+- `PaidMessagesWaived`
 - `PassportData`
 - `PassportElementError`
 - `PassportElementErrorDataField`
@@ -771,16 +818,20 @@ Bot API 10.3: 185 methods, 400 types. 34 methods and 107 types have no counterpa
 - `RevenueWithdrawalStatePending`
 - `RevenueWithdrawalStateSucceeded`
 - `SharedUser`
+- `SharedWidgetQuery`
 - `StarTransaction`
 - `StarTransactions`
 - `StoryArea`
-- `StoryAreaPosition`
 - `StoryAreaType`
 - `StoryAreaTypeLink`
 - `StoryAreaTypeLocation`
 - `StoryAreaTypeSuggestedReaction`
 - `StoryAreaTypeUniqueGift`
 - `StoryAreaTypeWeather`
+- `TonNft`
+- `TonNftAttribute`
+- `TonWalletCard`
+- `TonWalletCardSticker`
 - `TransactionPartner`
 - `TransactionPartnerAffiliateProgram`
 - `TransactionPartnerChat`
@@ -801,5 +852,10 @@ Bot API 10.3: 185 methods, 400 types. 34 methods and 107 types have no counterpa
 - `UserProfilePhotos`
 - `VideoChatParticipantsInvited`
 - `VideoQuality`
+- `WidgetQueryType`
+- `WidgetQueryTypeData`
+- `WidgetQueryTypeSentTransaction`
+- `WidgetQueryTypeSignData`
+- `WidgetQueryWallet`
 
 </details>

@@ -269,8 +269,8 @@ project.
 
 - Integration by rebase (§1).
 - Mirrored upstream branches deleted from `origin` (§3).
-- The `fast` extra depends on `tgcrypto-pyrofork>=1.2.9` from `Alb0204/tgcrypto-pyrofork`
-  (`Fork-only: tgcrypto-pyrofork`). The original `tgcrypto` (1.2.5) has no wheels past cp311, and
-  both distributions install the same `tgcrypto` module, so pulling in both makes one overwrite the
-  other's files.
+- The `fast` extra follows upstream's `kuricrypt` (since v2.2.27, 2026-11-09). It replaced the
+  fork's `tgcrypto-pyrofork>=1.2.9` pin (`Fork-only: tgcrypto-pyrofork`, dropped in that sync).
+  `pyrogram/crypto/aes.py` still falls back to an installed `tgcrypto` module, so existing
+  environments keep working.
 - Nothing is contributed upstream (the rule at the top of this file).

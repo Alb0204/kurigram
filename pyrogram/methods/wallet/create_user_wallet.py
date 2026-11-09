@@ -22,7 +22,7 @@ from __future__ import annotations as _annotations
 
 
 import pyrogram
-from pyrogram import raw, types
+from pyrogram import raw, types, utils
 
 
 class CreateUserWallet:
@@ -43,7 +43,9 @@ class CreateUserWallet:
         """
         r = await self.invoke(
             raw.functions.wallet.GetUserAddresses(
-                force=True, id=[await self.resolve_peer(user_id)], addresses=[]
+                force=True,
+                id=[utils.get_input_user_or_channel(await self.resolve_peer(user_id))],
+                addresses=[],
             )
         )
 

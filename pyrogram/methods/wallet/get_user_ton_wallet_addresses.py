@@ -23,7 +23,7 @@ from __future__ import annotations as _annotations
 import asyncio
 
 import pyrogram
-from pyrogram import raw, types
+from pyrogram import raw, types, utils
 
 
 class GetUserTonWalletAddresses:
@@ -45,7 +45,10 @@ class GetUserTonWalletAddresses:
         """
         is_iterable = not isinstance(user_ids, (int, str))
         user_ids = list(user_ids) if is_iterable else [user_ids]
-        user_ids = await asyncio.gather(*[self.resolve_peer(i) for i in user_ids])
+        user_ids = [
+            utils.get_input_user_or_channel(peer)
+            for peer in await asyncio.gather(*[self.resolve_peer(i) for i in user_ids])
+        ]
 
         r = await self.invoke(raw.functions.wallet.GetUserAddresses(id=user_ids, addresses=[]))
 

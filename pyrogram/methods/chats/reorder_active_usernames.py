@@ -21,7 +21,7 @@
 from __future__ import annotations as _annotations
 
 import pyrogram
-from pyrogram import raw
+from pyrogram import raw, utils
 
 
 class ReorderActiveUsernames:
@@ -48,17 +48,23 @@ class ReorderActiveUsernames:
             .. code-block:: python
 
                 # Reorder active usernames of the current user.
-                app.reorder_active_usernames(chat_id="me", order=["kurigram", "kurigrambot"])
+                await app.reorder_active_usernames("me", ["kurigram", "kurigrambot"])
         """
         peer = await self.resolve_peer(chat_id)
 
         if isinstance(peer, raw.types.InputPeerSelf):
             return await self.invoke(raw.functions.account.ReorderUsernames(order=usernames))
-        elif isinstance(peer, raw.types.InputPeerUser):
-            return await self.invoke(raw.functions.bots.ReorderUsernames(bot=peer, order=usernames))
-        elif isinstance(peer, raw.types.InputPeerChannel):
+        elif isinstance(peer, utils.PEERS_WITH_A_USER_ID):
             return await self.invoke(
-                raw.functions.channels.ReorderUsernames(channel=peer, order=usernames)
+                raw.functions.bots.ReorderUsernames(
+                    bot=utils.get_input_user_or_channel(peer), order=usernames
+                )
+            )
+        elif isinstance(peer, utils.PEERS_WITH_A_CHANNEL_ID):
+            return await self.invoke(
+                raw.functions.channels.ReorderUsernames(
+                    channel=utils.get_input_user_or_channel(peer), order=usernames
+                )
             )
         else:
             raise ValueError("Invalid peer type")

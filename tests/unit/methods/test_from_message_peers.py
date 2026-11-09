@@ -227,6 +227,30 @@ async def first_query(call: Any) -> TLObject:
             lambda q: q.user_id,
             _INPUT_USER,
         ),
+        (
+            lambda c: c.reorder_active_usernames(_CHANNEL_ID, ["a", "b"]),
+            raw.functions.channels.ReorderUsernames,
+            lambda q: q.channel,
+            _INPUT_CHANNEL,
+        ),
+        (
+            lambda c: c.reorder_active_usernames(_USER, ["a", "b"]),
+            raw.functions.bots.ReorderUsernames,
+            lambda q: q.bot,
+            _INPUT_USER,
+        ),
+        (
+            lambda c: c.create_user_wallet(_USER),
+            raw.functions.wallet.GetUserAddresses,
+            lambda q: q.id[0],
+            _INPUT_USER,
+        ),
+        (
+            lambda c: c.get_user_ton_wallet_addresses(_USER),
+            raw.functions.wallet.GetUserAddresses,
+            lambda q: q.id[0],
+            _INPUT_USER,
+        ),
     ],
     ids=[
         "get_messages",
@@ -248,6 +272,10 @@ async def first_query(call: Any) -> TLObject:
         "add_contact",
         "get_common_chats",
         "set_game_score",
+        "reorder_active_usernames_channel",
+        "reorder_active_usernames_bot",
+        "create_user_wallet",
+        "get_user_ton_wallet_addresses",
     ],
 )
 async def test_a_from_message_peer_reaches_the_right_function_in_the_right_form(
